@@ -1,0 +1,177 @@
+<title *ngIf="data">{{data.title}}</title>
+
+<div class="allDetailsList col-xs-12 zeroPadding" style="margin-top:55px;">
+  <div class="col-xs-12 text-center zeroPadding" style="background:#fff;">
+    <div class="container padMoree">
+      <span class="menuSecondary"><a class="colorGrayLight textDecoration" routerLink="../about">{{howItWorks.aboutUs}}</a></span>
+      <!--<span class="menuSecondary"><a class="colorGrayLight textDecoration" routerLink="../jobs">Jobs</a></span>-->
+      <span class="menuSecondary active"><a class="textDecoration" routerLink="../howitworks">{{howItWorks.howItWorks}}</a></span>
+    </div>
+    <div class="aboutCover imgCoverHowitWorks col-xs-12 zeroPadding text-center">
+      <h1 class="aboutTextImage textShadow">{{howItWorks.mobileCommerce}}</h1>
+      <div class="howItWorksDownload col-xs-12 zeroPadding">
+        <!-- <button type="button" class="btn spanWorks downloadButton marginPadding" data-toggle="modal" data-target="#sellModalhow">Download The App</button> -->
+        <!--<button type="button" class="btn btnWhite spanWorks"><i class="ion-play"></i> See How It Works</button>-->
+      </div>
+    </div>
+  </div>
+  <div class="allDescriptionList col-xs-12 zeroPadding">
+    <div class="container">
+      <div class="boxAlt ourStoryList col-xs-12 zeroPadding" style="margin-top: 40px;">
+        <div class="storyDeatils">
+          <h2 class="text-center ourStoryTitle colorGray">{{howItWorks.startlessIn30Secs}}</h2>
+        </div>
+        <div class="howItListDeails col-xs-12 padMore">
+          <div class="itWorksImg text-center col-xs-12 col-sm-4 zeroPadding form-group">
+            <div class="col-xs-12 zeroPadding">
+              <div class="imgWorksMobile mobileItImg"></div>
+              <div class="col-xs-12 zeroPadding">
+                <div class="colorGray sizeLarge">{{howItWorks.discoverLocally}}</div>
+                <div class="dashLst"></div>
+                <p class="colorGrayLight sizeSmall">{{howItWorks.browseMillionListings}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="itWorksImg text-center col-xs-12 col-sm-4 zeroPadding form-group">
+            <div class="col-xs-12 zeroPadding">
+              <div class="imgWorksMobile mobileItImg1"></div>
+              <div class="col-xs-12 zeroPadding">
+                <div class="colorGray sizeLarge">{{howItWorks.chatInstantly}}</div>
+                <div class="dashLst"></div>
+                <p class="colorGrayLight sizeSmall">{{howItWorks.messageUsersAnonymously}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="itWorksImg text-center col-xs-12 col-sm-4 zeroPadding form-group">
+            <div class="col-xs-12 zeroPadding">
+              <div class="imgWorksMobile mobileItImg2"></div>
+              <div class="col-xs-12 zeroPadding">
+                <div class="colorGray sizeLarge">{{howItWorks.sellSimpleVideo}}</div>
+                <div class="dashLst"></div>
+                <p class="colorGrayLight sizeSmall">{{howItWorks.easilyPost}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      &nbsp;
+      <div class="boxAlt ourStoryList col-xs-12 zeroPadding form-group">
+        <div class="storyDeatils">
+          <h2 class="text-center ourStoryTitle colorGray">{{howItWorks.buildTrustCommunity}}</h2>
+        </div>
+        <div class="howItListDeails col-xs-12 padMore">
+          <div class="itWorksImg text-center col-xs-12 col-sm-4 zeroPadding form-group">
+            <div class="col-xs-12 zeroPadding">
+              <div class="imgWorksMobile mobileItImgtrust1"></div>
+              <div class="col-xs-12 zeroPadding">
+                <h5 class="colorGray sizeSmall">{{howItWorks.userProfiles}}</h5>
+                <p class="colorGrayLight sizeSmall">{{howItWorks.knowMoreBuyers}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="itWorksImg text-center col-xs-12 col-sm-4 zeroPadding form-group">
+            <div class="col-xs-12 zeroPadding">
+              <div class="imgWorksMobile mobileItImgtrust2"></div>
+              <div class="col-xs-12 zeroPadding">
+                <h5 class="colorGray sizeSmall">{{howItWorks.userRatings}}</h5>
+                <p class="colorGrayLight sizeSmall">{{howItWorks.checkBuyer}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="itWorksImg text-center col-xs-12 col-sm-4 zeroPadding form-group">
+            <div class="col-xs-12 zeroPadding">
+              <div class="imgWorksMobile mobileItImgtrust3"></div>
+              <div class="col-xs-12 zeroPadding">
+                <h5 class="colorGray sizeSmall">{{howItWorks.realTimeAlerts}}</h5>
+                <p class="colorGrayLight sizeSmall">{{howItWorks.getNotified}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="YeloNews borderAlt col-xs-12">
+        <div class="storyDeatils colorGray col-xs-12 zeroPadding form-group">
+          <h2 class="text-center ourStoryTitle marginPadding">{{howItWorks.titleIs}} <b>{{howItWorks.free}}</b> {{howItWorks.toDownload}}</h2>
+          <div class="text-center">{{howItWorks.downloadTopRated}}</div>
+        </div>
+        <div class="aboutContentList text-center col-xs-12 zeroPadding">
+          <div class="appStoreIcon">
+            <!-- <span class="">
+              <a href="#">
+                <img class="stroeIcon cursorPointer" routerLink="../register" src="{{howItWorks.howItWorksPlayStore}}" width="140" alt="">
+              </a>
+            </span>
+            <span class="">
+              <a href="#">
+                <img class="stroeIcon cursorPointer" routerLink="../register" src="{{howItWorks.howItWorksAppstore}}" width="140" alt="">
+              </a>
+            </span> -->
+          </div>
+          <!-- <div class="imgWorksMobile starIcon"></div> -->
+          <!--<div class="colorLightGray sizeSmall">
+            Over 200,000 5-star reviews on our iOS and
+            <br>
+            Android Apps!
+          </div>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- sell on popup -->
+<div class="sellModalhow modal fade" id="sellModalhow2" role="dialog">
+    <div class="modal-dialog" style="margin-top:12%;">
+  
+      <!-- Modal content-->
+      <div class="modal-content col-xs-12 zeroPadding">
+        <div class="modal-body sellPopup col-xs-12 zeroPadding">
+          <button type="button" class="close" data-dismiss="modal" style="color:initial;">&times;</button>
+          <div class="col-xs-12 contentSell" *ngIf="!succesSeller">
+              <h1 class="text-center colorGray padMore" style="margin: 0px 0 30px;">{{howItWorks.comingSoon}}</h1>
+            
+            <!-- <h1 class="text-center colorGray">Send app link</h1>
+            <div class="phonOrEmail col-xs-12 padMore text-center" *ngIf="!howPopupSuccess">
+              <div class="emailList col-xs-12 zeroPadding">
+                <img class="howPopupImg" src="assets/images/howEmail.png">
+                <input type="text" name="sellEmail" [(ngModel)]="sellEmail" #hv (keyup)="emailValidation(hv.value)" (change)="emailValidation(hv.value)"
+                  class="inputEmail form-control input-lg" placeholder="your-email@domain.com">
+              </div>
+              <h5 class="errorMsg" *ngIf="email_Error">Please provide a valid email address...</h5>
+              <div class="colorGray col-xs-12 zeroPadding">
+                <b>or</b>
+              </div>
+              <div class="phoneList col-xs-12 zeroPadding form-group">
+                <img class="howPopupImg" src="assets/images/howPhone.png">
+                <input type="text" name="sellPhone" [(ngModel)]="sellPhone" #hp (keyup)="mobileValidation(hp.value)" (change)="mobileValidation(hp.value)"
+                  class="inputEmail form-control input-lg" placeholder="123-456-7890">
+              </div>
+              <h5 class="errorMsg" *ngIf="phone_Error">Please try entering your full number, including the country code. </h5>
+              <h5 class="errorMsg" *ngIf="PEerror">{{PEerror}}</h5>
+              <div class="sendSell submitLogin col-xs-12 zeroPadding">
+                <button type="button" class="btn btnSubmit" (click)="sellHowSend()" [disabled]="!(registerSave)">Send</button>
+              </div>
+            </div>
+            <div class="successTextHow col-xs-12 padMore text-center" *ngIf="howPopupSuccess">
+              <h3>You have recently requested the app.</h3>
+              <p style="margin-top:20px">It may take a few minutes for you to receive it.</p>
+              <p>Please wait about 5 minutes
+                <br> to make another request.</p>
+            </div> -->
+          </div>
+          <div class="col-xs-12 sellMobileImg text-center" *ngIf="succesSeller">
+            <br>
+            <br>
+            <br>
+            <h1 class="sizeLarge">{{howItWorks.thankYou}}</h1>
+            <h1 class="sizeMedium">{{howItWorks.fewMinsReceive}}</h1>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>

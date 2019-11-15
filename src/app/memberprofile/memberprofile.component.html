@@ -1,0 +1,200 @@
+<title *ngIf="memberProfileData">{{memberProfileSub.profile}} {{memberProfileData.fullName}} - {{memberProfileSub.title}}</title>
+
+<div class="loaderBackground" [hidden]="allListYelo">
+  <div class="loader"></div>
+</div>
+<div class="allItemDetails col-xs-12 zeroPadding" [hidden]="!allListYelo">
+  <div class="col-xs-12 padMoree itemSellLocally">
+    <div class="container recentList">
+      <div class="col-xs-12 col-sm-8 paddingLeft">
+        <h1 class="sizeLarge colorGray" *ngIf="memberProfileData">{{memberProfileData.fullName}} {{memberProfileSub.offers}}</h1>
+        <div class="itemAllCollection" id="columns" *ngIf="memberListLength && memberList">
+          <figure class="listImageItem boxShadowList" *ngFor="let member of memberList">
+            <div class="allListRecent cursorPointer" (click)="itemDetails(member.postId)">
+              <div class="imgRecent">
+                <img class="" src="{{member.mainUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"
+                  alt="{{member.productName}}" title="{{member.productName}}">
+              </div>
+              <div class="recentContentList col-xs-12">
+                <div class="itemTitle textEllipse col-xs-12 zeroPadding colorGray">{{member.productName}}</div>
+                <div class="itemPrice col-xs-12 zeroPadding">
+                  {{member.currency}} {{member.price}}
+                  <!-- <div class="pull-left">
+                    <img class="bitcoinCurrency" src="assets/images/bitcoinCurrency.png">
+                  </div>
+                  <div class="bitCoinBtc">
+                    {{member.bitCoinPrice.toFixed(8)}} BTC
+                    <br> {{member.priceInUSD.toFixed(2)}} USD
+                  </div> -->
+                </div>
+                <div class="itemDistance textEllipse col-xs-12 zeroPadding color" *ngIf="member.city">
+                  <i class="ion-ios-location"></i> {{member.city}}, {{member.countrySname}}</div>
+              </div>
+            </div>
+          </figure>
+        </div>
+        <div class="col-xs-12 zeroPadding errorData" *ngIf="!memberListLength">
+          <img class="col-xs-12 zeroPadding" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/myoffer_nooffers.png">
+        </div>
+      </div>
+      <div class="itemImageContent col-xs-12 col-sm-4 paddingRight">
+        <div class="sellerList text-center form-group boxShadowList col-xs-12 zeroPadding" *ngIf="memberProfileData">
+          <!-- <div class="PriceHeader col-xs-12">
+            {{memberProfileSub.seller}}
+          </div>
+          <div class="col-xs-12 padMore">
+            <div class="boxLargeInner col-xs-12">
+              <img class="sellerImg" src="{{memberProfileData.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+            </div>
+            <div class="sizeMedium">{{memberProfileData.fullName}}</div>
+          </div> -->
+
+          <div class="PriceHeader col-xs-12">
+            <span class="pull-left sellerTitle" [class.active]="loginUsername != memberProfileData.membername" style="font-weight: 600;">{{memberProfileSub.seller}}</span>
+            <span class="watchList boxShadowList1 zeroPadding cursorPointer pull-right" *ngIf="loginUsername != memberProfileData.membername">
+              <div class="askList col-xs-12 text-cente cursorPointer" (click)="followerButton(membername)" *ngIf="memberProfileData.userFollowRequestStatus == null">
+                <span class="color">
+                  <i class="ion-person-stalker"></i> {{memberProfileSub.follow}}</span>
+              </div>
+              <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(membername)" *ngIf="memberProfileData.userFollowRequestStatus == 1">
+                <span class="hoverFollowing">{{memberProfileSub.following}}</span>
+                <span class="hoverunFollow">{{memberProfileSub.unFollow}}</span>
+              </div>
+            </span>
+          </div>
+          <div class="col-xs-12 padMore">
+            <div class="boxLargeInner col-xs-12 zeroPadding">
+              <div class="pull-left">
+                <img class="sellerImg" src="{{memberProfileData.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+              </div>
+              <div class="pull-left text-left" style="line-height: 30px;">
+                <span class="sizeMedium">{{memberProfileData.fullName}}</span>
+                <br>
+                <!-- <span class="socialMediaIcons">
+                    <img class="" *ngIf="memberProfileData.facebookVerified == 1" src="{{item.settingsFBOn}}" title="Facebook Connected" alt="Facebook Connected">
+                    <img class="" *ngIf="memberProfileData.facebookVerified != 1" title="Facebook Not Connected" src="{{item.settingsFBOff}}" alt="Facebook Not Connected">
+                    <img class="" *ngIf="memberProfileData.googleVerified == 1" src="{{item.settingsGOn}}" alt="Google+ Connected" title="Google+ Connected">
+                    <img class="" *ngIf="memberProfileData.googleVerified != 1" src="{{item.settingsGOff}}" alt="Google+ Not Connected" title="Google+ Not Connected">
+                    <img class="marginPadding" *ngIf="memberProfileData.emailVerified == 1" title="Google+ Verified" src="{{item.settingsEmailOn}}" alt="Google+ Verified">
+                    <img class="marginPadding" *ngIf="memberProfileData.emailVerified != 1" (click)="emailClick();" title="Email Not Verified" src="{{item.settingsEmailOff}}"
+                      alt="Email Not Verified">
+                  </span> -->
+              </div>
+              <div class="sellerList col-xs-12 zeroPadding" *ngIf="followers && followOpen && memberProfileData">
+                <div class="PriceHeader1 padMoree paddingRight paddingLeft cursorPointer sizeSmall" data-toggle="modal" data-target="#memberFollowers">
+                  <!-- {{item.followers}} ({{followers.length}}) -->
+                  Followed by
+                </div>
+                <div class="col-xs-12 zeroPadding form-group" *ngIf="followers">
+                  <div class="boxLargeInner imgFollowers" *ngFor="let followersImg of followers">
+                    <img class="borerRadius" src="{{followersImg.profilePicUrl}}" (click)="memberProfile(followersImg.username)" width="30" height="30"
+                      onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';" style="border-radius:30px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="sizeMedium cursorPointer" (click)="memberProfile(memberProfileData.membername)">{{memberProfileData.memberFullName}}</div> -->
+          </div>
+        </div>
+
+        <div class="mapList col-xs-12 zeroPadding text-center form-group">
+          <div class="PriceHeader col-xs-12 textEllipse" *ngIf="memberProfileData && memberProfileData.memberAddress">
+            {{memberProfileData.memberAddress}}
+          </div>
+          <div class="map_canvas" id="map_canvas" (click)="popupLocation()" data-toggle="modal" data-target="#mapItemPopup"></div>
+          <!--<div class="map_canvas" id="map_canvas"></div>-->
+          <div class="sizeSmall col-xs-12">Approximation to protect seller's privacy</div>
+        </div>
+
+        <!-- <div class="sellerList form-group boxShadowList col-xs-12 zeroPadding" *ngIf="followers && followOpen && memberProfileData">
+          <div class="PriceHeader text-center col-xs-12 cursorPointer" data-toggle="modal" data-target="#memberFollowers">
+            {{memberProfileSub.followers}} ({{followers.length}})
+          </div>
+          <div class="col-xs-12 padMore">
+            <div class="col-xs-12 zeroPadding form-group">
+              <div class="boxLargeInner imgFollowers" *ngFor="let followersImg of followers">
+                <img class="borerRadius" src="{{followersImg.profilePicUrl}}" (click)="memberProfile(followersImg.username)" width="46" height="46"
+                  onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+              </div>
+            </div>
+            <div class="askList col-xs-12 text-center cursorPointer" (click)="followerButton(membername)" *ngIf="memberProfileData.userFollowRequestStatus == null">
+              <span class="color">
+                <i class="ion-person-stalker"></i> {{memberProfileSub.follow}}</span>
+            </div>
+            <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(membername)" *ngIf="memberProfileData.userFollowRequestStatus == 1">
+              <span class="hoverFollowing">{{memberProfileSub.following}}</span>
+              <span class="hoverunFollow">{{memberProfileSub.unFollow}}</span>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="watchList boxShadowList padMore cursorPointer col-xs-12" *ngIf="!followOpen && memberProfileData && loginUsername != membername">
+          <div class="askList col-xs-12 text-cente cursorPointer" (click)="followerButton(membername)" *ngIf="memberProfileData.userFollowRequestStatus == null">
+            <span class="color">
+              <i class="ion-person-stalker"></i> {{memberProfileSub.follow}}</span>
+          </div>
+          <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(membername)" *ngIf="memberProfileData.userFollowRequestStatus == 1">
+            <span class="hoverFollowing">{{memberProfileSub.following}}</span>
+            <span class="hoverunFollow">{{memberProfileSub.unFollow}}</span>
+          </div>
+        </div> -->
+      </div>
+
+    </div>
+    <br>
+  </div>
+
+</div>
+
+<!-- map function popup -->
+
+<div class="modal fade itemPopupAll" id="mapItemPopup" role="dialog">
+  <div class="modal-dialog" style="margin-top:12%;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 padMoree">
+        <div class="col-xs-11 zeroPadding">{{memberProfileSub.bangaluru}}</div>
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="text-center col-xs-12 zeroPadding">
+        <div class="map" id="map"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- getMemberFollowers -->
+<div class="modal fade itemPopupAll" id="memberFollowers" role="dialog">
+  <div class="modal-dialog" style="margin-top:12%;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="modal-body col-xs-12 zeroPadding padMoree">
+        <h1 class="sizeLarge col-xs-12 colorGray">{{memberProfileSub.membername}} {{memberProfileSub.follower}}</h1>
+        <div class="borerRadius col-xs-12 zeroPadding allListFollower form-group" *ngIf="followers">
+          <div class="memberFollowerPopup col-xs-12" *ngFor="let followersImg of followers;let i = index;">
+            <div class="pull-left cursorPointer" style=" width: 50px;" (click)="memberProfile(followersImg.username)">
+              <img class="borerRadius followerImg" width="46" height="46" src="{{followersImg.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+            </div>
+            <div class="pull-left memberUserName cursorPointer" (click)="memberProfile(followersImg.username)">
+              {{followersImg.username}}
+            </div>
+            <div class="pull-right followFollower" *ngIf="followersImg.username != loginUsername">
+              <button class="btn color btnFollow" type="button" *ngIf="followersImg.userFollowRequestStatus  == null" (click)="followerButton(followersImg.username, i)">
+                <i class="ion-person-stalker"></i> {{memberProfileSub.follow}}</button>
+              <button class="btn btnFollow btnFollowing" type="button" *ngIf="followersImg.userFollowRequestStatus == 1" (click)="unFollowButton(followersImg.username, i)">
+                <span class="hoverunFollow">{{memberProfileSub.unFollow}}</span>
+                <span class="hoverFollowing">{{memberProfileSub.following}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

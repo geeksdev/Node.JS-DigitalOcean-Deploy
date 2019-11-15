@@ -1,0 +1,934 @@
+<title *ngIf="itemList">
+  {{itemList.seoTitle}}
+</title>
+<div class="loaderBackground" [hidden]="allListYelo">
+  <div class="loader"></div>
+</div>
+<div class="allItemDetails col-xs-12 zeroPadding" [hidden]="!allListYelo">
+  <div class="col-xs-12 padMoree form-group itemSellLocally" style="background-color: hsla(0,0%,100%,.8);min-height:0px !important;">
+    <div class="container">   
+      
+     
+  <!-- <div class="googleads col-xs-12 zeroPadding form-group">
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-5771557702492751",
+          enable_page_level_ads: true
+        });
+      </script>
+  </div> -->
+
+      <div class="col-sm-6 zeroPadding YeloSimilarWay">{{item.titleSimpleWayToBuy}}</div>
+      <div class="col-xs-12 col-sm-6 zeroPadding text-right">
+        <!-- <span class="">
+          <a href="#">
+            <img class="stroeIcon cursorPointer" src="{{item.itemAppStore}}" alt="" width="140px">
+          </a>
+        </span>
+        <span class="">
+          <a href="#">
+            <img class="stroeIcon cursorPointer" src="{{item.itemPlayStore}}" alt="" width="140px">
+          </a>
+        </span> -->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="carouselItemDetail col-xs-12 zeroPadding">
+      <div class="itemImageDetails col-xs-12 col-sm-8 paddingLeft" *ngIf="itemList">
+        <div class="col-xs-12 czroselDetails zeroPadding form-group">
+          <div class="zoomCenter text-center col-xs-12 zeroPadding">
+            <div class="slodTitle col-xs-12" *ngIf="itemList.sold && itemList.sold != 0">
+              <span>Sold</span>
+              <!-- <span *ngIf="itemList.sold == 2">Mark As Sold</span> -->
+            </div>
+            <div id="myCarousel" data-interval="false" class="carousel slide" data-ride="carousel" *ngIf="itemList.imageCount > 1">
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <div class="item active" id="1">
+                  <img class="carouselImage" src="{{itemList.mainUrl}}" alt="{{itemList.mainImgAltText}}" title="{{itemList.mainImgAltText}}">
+                </div>
+                <div class="item" *ngIf="itemList.imageUrl1" id="2">
+                  <img class="carouselImage" src="{{itemList.imageUrl1}}" alt="{{itemList.imageUrl1AltText}}" title="{{itemList.imageUrl1AltText}}">
+                </div>
+                <div class="item" *ngIf="itemList.imageUrl2" id="3">
+                  <img class="carouselImage" src="{{itemList.imageUrl2}}" alt="{{itemList.imageUrl2AltText}}" title="{{itemList.imageUrl2AltText}}">
+                </div>
+                <div class="item" *ngIf="itemList.imageUrl3" id="4">
+                  <img class="carouselImage" src="{{itemList.imageUrl3}}" alt="{{itemList.imageUrl3AltText}}" title="{{itemList.imageUrl3AltText}}">
+                </div>
+                <div class="item" *ngIf="itemList.imageUrl4" id="5">
+                  <img class="carouselImage" src="{{itemList.imageUrl4}}" alt="{{itemList.imageUrl4AltText}}" title="{{itemList.imageUrl4AltText}}">
+                </div>
+              </div>
+              <!-- Left and right controls -->
+              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" (click)="InnerCarousel()">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">{{item.previous}}</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" (click)="InnerCarousel()">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">{{item.next}}</span>
+              </a>
+            </div>
+            <div class="boxShadowList singleImageList col-xs-12 zeroPadding" *ngIf="itemList.imageCount == 1 || itemList.imageCount == null">
+              <img class="carouselImage" src="{{itemList.mainUrl}}" onError="this.src='assets/images/lazyLoad.png';" alt="{{itemList.mainImgAltText}}"
+                title="{{itemList.mainImgAltText}}">
+            </div>
+            <div class="boxShadowList singleImageList col-xs-12" *ngIf="postListImg" style="height: 200px;padding: 90px">
+              <span> {{item.postRemoved}}</span>
+            </div>
+            <div class="carouselInnerallImae col-xs-12" *ngIf="itemList.imageCount > 1">
+              <span class="imgItem active" (click)="changeImage(1)" (mouseover)="changeImage(1)" id="1img">
+                <img class="innerImage" src="{{itemList.mainUrl}}" alt="{{itemList.mainImgAltText}}" title="{{itemList.mainImgAltText}}">
+              </span>
+              <span class="imgItem" *ngIf="itemList.imageUrl1" id="2img" (mouseover)="changeImage(2)" (click)="changeImage(2)">
+                <img class="innerImage" src="{{itemList.imageUrl1}}" alt="{{itemList.imageUrl1AltText}}" title="{{itemList.imageUrl1AltText}}">
+              </span>
+              <span class="imgItem" *ngIf="itemList.imageUrl2" id="3img" (mouseover)="changeImage(3)" (click)="changeImage(3)">
+                <img class="innerImage" src="{{itemList.imageUrl2}}" alt="{{itemList.imageUrl2AltText}}" title="{{itemList.imageUrl2AltText}}">
+              </span>
+              <span class="imgItem" *ngIf="itemList.imageUrl3" id="4img" (mouseover)="changeImage(4)" (click)="changeImage(4)">
+                <img class="innerImage" src="{{itemList.imageUrl3}}" alt="{{itemList.imageUrl3AltText}}" title="{{itemList.imageUrl3AltText}}">
+              </span>
+              <span class="imgItem" *ngIf="itemList.imageUrl4" id="5img" (click)="changeImage(5)" (mouseover)="changeImage(5)">
+                <img class="innerImage" src="{{itemList.imageUrl4}}" alt="{{itemList.imageUrl4AltText}}" title="{{itemList.imageUrl4AltText}}">
+              </span>
+            </div>
+          </div>
+
+          <div class="boxShadowList col-xs-12 carouselContent zeroPadding hidden-xs">
+            <!-- <div class="padMore emailFacebook col-xs-12">
+              <span class="emailFace cursorPointer" style="color: #F2B52A;">
+                <i class="ion-android-mail"></i> Email</span>
+              <span class="emailFace cursorPointer" style="color: #5A83BE;" (click)="onFacebookLoginClick()">
+                <i class="ion-social-facebook"></i> Facebook</span>
+            </div> -->
+            <div class="col-xs-12 padMore">
+              <div class="col-xs-12 descriptionCommentsList zeroPadding cursorPointer form-group" style="background: #efefef">
+                <span class="listTap active" id="11com" (click)="commentsList(1)">{{item.description}}</span>
+                <span class="listTap" id="22com" (click)="commentsList(2)">{{item.comments}}</span>
+              </div>
+              <div class="col-xs-12 zeroPadding descriptionList" [class.active]="" *ngIf="!listComments">
+                <div class="col-xs-12 zeroPadding form-group" *ngIf="itemList.description">
+                  <div class="col-xs-12 zeroPadding colorGray">{{item.description}}</div>
+                  <div class="col-xs-12 zeroPadding">{{itemList.description}}</div>
+                </div>
+                <div class="col-xs-12 zeroPadding" *ngIf="itemList.condition">
+                  <div class="col-xs-12 zeroPadding colorGray">{{item.condition}}</div>
+                  <div class="col-xs-12 zeroPadding">{{itemList.condition}}</div>
+                </div>
+              </div>
+              <div class="commentList col-xs-12 zeroPadding" *ngIf="listComments">
+                <div class="col-xs-12 zeroPadding chatMsg form-group">
+                  <div class="listItemMsg col-xs-12" *ngFor="let list of itemList.commentData; let i =index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+                    <span *ngIf="list.commentBody != null">
+                      <span class="chatUserNamr cursorPointer" (click)="memberProfile(list.commentedByUser)" style="text-transform: capitalize;color:#484848"
+                        *ngIf="token">
+                        <b>{{list.commentedByUser}} : </b>
+                      </span>
+                      <span class="colorGray chatMsgList" style="word-break: break-all;" [innerHtml]="list.commentBody"></span>
+                      <span class="colorGrayLight chatMsgList pull-right">{{list.commentedOn}}
+                        <i class="ion-ios-trash-outline cursorPointer" (click)="deleteComment(list, i, itemList.postType, itemList.postId)"></i>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="col-xs-12 padMoree text-center cursorPointer color" *ngIf="itemList.totalComments > 5 && !allComment && token"
+                    (click)="allCommentsList();">{{item.viewAll}} {{itemList.totalComments}} {{item.comments}}</div>
+                </div>
+                <div class="textAreaList col-xs-12 zeroPadding form-group">
+                  <textarea class="inputTextarea col-xs-12 padMoree" [(ngModel)]="textAreaMsg" maxlength="120" #pt (keyup)="postTextArea(pt.value)"
+                    cols="4" rows="4" name="" style="resize:none;border-radius: 5px;" placeholder="{{item.typeYourMessage}}"></textarea>
+                </div>
+                <div class="sizeSmall">{{item.youHave}}
+                  <span *ngIf="!lengthTextarea">{{item.one120}}</span>
+                  <span class="" *ngIf="lengthTextarea">{{120 - lengthTextarea}}</span> {{item.characterLeft}}</div>
+                <div class="postCommentsButton col-xs-12 zeroPadding">
+                  <button type="button" class="btn pull-right postChat" (click)="postCommentSend(itemList.postType, itemList.postId)" [disabled]="!textAreaMsg">{{item.postComment}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="itemImageContent col-xs-12 col-sm-4 zeroPadding">
+
+        <div class="listName itemPriceList form-group boxShadowList col-xs-12 zeroPadding">
+          <div class="col-xs-12 padMore" style="padding-top: 10px !important;" *ngIf="itemList">
+            <div class="itemTitleList col-xs-12 zeroPadding">
+              <!-- <h1 class="sizeMedium colorGrayLight marginPadding textTransform colorList">{{itemList.productName}}</h1> -->
+              <div class="col-xs-12 zeroPadding colorGrayLight sizeMedium">
+                <span class="cursorPointer textTransform textEllipse col-xs-8 col-sm-6 col-md-7 zeroPadding">{{itemList.productName}}</span>
+                <span class="cursorPointer iconList textTransform sizeSmall col-xs-4 col-sm-6 col-md-5 zeroPadding text-right">
+                  <span class="iconCount">{{itemList.clickCount}}</span>
+                  <i class="ion-eye color sizeSmall"></i>
+                  <span class="iconCount">{{itemList.likes}}</span>
+                  <i class="ion-heart color sizeSmall"></i>
+                </span>
+                <!-- <span class="cursorPointer iconList textTransform sizeSmall pull-right">                  
+                  {{itemList.likes}} <i class="ion-heart color sizeMedium"></i>
+                </span> -->
+              </div>
+              <div class="col-xs-12 colorGray sizeSmall" style="padding: 5px 0 8px;">
+                <span class="cursorPointer textTransform" (click)="searchCategory(itemList.categoryData[0].category)">{{itemList.categoryData[0].category}} | </span>
+                <span class="cursorPointer textTransform">{{item.posted}} {{itemList.postedOn}} {{ago}} </span>
+                <!-- <span class="cursorPointer textTransform">{{itemList.clickCount}} <i class="ion-eye color sizeMedium"></i> | </span>
+                <span class="cursorPointer textTransform">{{itemList.likes}} <i class="ion-heart color sizeMedium"></i></span> -->
+              </div>
+              <div class="col-xs-12 colorGrayLight zeroPadding form-group sizeMedium">
+                <span class="dollarSize">
+                  <b style="font-weight:600;">{{itemList.currency}} {{itemList.price.toFixed(2)}}</b>
+                </span>
+              </div>
+              <div class="col-xs-12 zeroPadding">
+                <!-- <span class="color textDecorationLine cursorPointer textTransform" (click)="searchCategory(itemList.categoryData[0].category)">{{itemList.categoryData[0].category}}</span>
+                <span class="color textDecorationLine cursorPointer textTransform">{{item.posted}} {{itemList.postedOn}} {{ago}}</span> -->
+                <!-- <span class="textTransform" *ngIf="itemList.city">
+                      <span style="text-transform:lowercase">in</span> {{itemList.city}}, {{itemList.countrySname}}
+                </span> -->
+              </div>
+
+              <!-- <div class="watchList boxShadowList1 zeroPadding cursorPointer col-xs-6">
+                <div class="askList col-xs-12 text-cente cursorPointer" data-toggle="modal" data-target="#followItemPopup" (click)="followerButton(itemList.membername)"
+                  *ngIf="itemList.followRequestStatus == null">
+                  <span class="color">
+                    <i class="ion-person-stalker"></i> {{item.follow}}</span>
+                </div>
+                <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(itemList.membername)" *ngIf="itemList.followRequestStatus == 1">
+                  <span class="hoverFollowing">{{item.following}}</span>
+                  <span class="hoverunFollow">{{item.unFollow}}</span>
+                </div>
+              </div> -->
+              <div class="watchList cursorPointer boxShadowList1 col-xs-6 form-group zeroPadding" *ngIf="itemList.membername != itemList.username">
+                <div class="askList col-xs-12 text-center" (click)="watchList(0, itemList.postType)" *ngIf="itemList.likeStatus == 0">
+                  <span class="color">
+                    <!-- <i class="ion-ios-heart"></i>  -->
+                    {{item.watch}}</span>
+                </div>
+                <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="watchList(1, itemList.postType)" *ngIf="itemList.likeStatus == 1">
+                  <span class="hoverFollowing">{{item.watching}}</span>
+                  <span class="hoverunFollow">{{item.unWatch}}</span>
+                </div>
+              </div>
+              <div class="watchList boxShadowList1 cursorPointer col-xs-6 paddingRight" *ngIf="itemList.membername != itemList.username">
+                <div class="askList col-xs-12 text-cente cursorPointer" (click)="reportItem()">
+                  <span class="color">
+                    <!-- <i class="ion-ios-flag"></i> -->
+                    Report</span>
+                </div>
+              </div>
+
+              <div class="watchList cursorPointer boxShadowList1 col-xs-6 form-group zeroPadding" *ngIf="itemList.membername == itemList.username">
+                <div class="askList col-xs-12 text-center" (click)="editPost(itemList)">
+                  <span class="color">
+                    Edit</span>
+                </div>
+              </div>
+              <div class="watchList boxShadowList1 cursorPointer col-xs-6 paddingRight" *ngIf="itemList.membername == itemList.username">
+                <div class="askList col-xs-12 text-cente cursorPointer" (click)="deletePosts(itemList)">
+                  <span class="color">
+                    Delete</span>
+                </div>
+              </div>
+
+
+              <div class="col-xs-12 zeroPadding form-group" (click)="makeOfferPriceEmpty()" *ngIf="itemList.membername != itemList.username"
+                data-toggle="modal" data-target="#makeOffer">
+                <span class="offerButton btn">{{item.makeOffer}}</span>
+              </div>
+
+            </div>
+            <!-- <div class="reportButton col-xs-4 paddingRight" (click)="reportItem()">
+              <span class="repotSpan pull-right">
+                    <i class="ion-ios-flag"></i> {{item.report}}</span>
+            </div> -->
+
+          </div>
+          <div class="mapList col-xs-12 text-center form-group">
+            <div class="PriceHeader col-xs-12 textEllipse textTransform" *ngIf="itemList && itemList.city">
+              {{itemList.city}}, {{itemList.countrySname}}
+            </div>
+            <div class="map_canvas" id="map_canvas" (click)="popupLocation()" data-toggle="modal" data-target="#mapItemPopup"></div>
+            <!--<div class="map_canvas" id="map_canvas"></div>-->
+            <div class="sizeSmall col-xs-12">{{item.approximationProtectPrivacy}}</div>
+          </div>
+        </div>
+
+        <div class="boxShadowList col-xs-12 carouselContent zeroPadding form-group visible-xs">
+          <div class="col-xs-12 padMore" *ngIf="itemList">
+            <div class="col-xs-12 descriptionCommentsList zeroPadding cursorPointer form-group" style="background: rgba(220, 220, 220, 0.7);">
+              <span class="listTap active" id="1com" (click)="commentsList(1)">{{item.description}}</span>
+              <span class="listTap" id="2com" (click)="commentsList(2)">{{item.comments}}</span>
+            </div>
+            <div class="col-xs-12 zeroPadding descriptionList" *ngIf="!listComments">
+              <div class="col-xs-12 zeroPadding form-group" *ngIf="itemList.description">
+                <div class="col-xs-12 zeroPadding colorGray">{{item.description}}</div>
+                <div class="col-xs-12 zeroPadding">{{itemList.description}}</div>
+              </div>
+              <div class="col-xs-12 zeroPadding" *ngIf="itemList.condition">
+                <div class="col-xs-12 zeroPadding colorGray">{{item.condition}}</div>
+                <div class="col-xs-12 zeroPadding">{{itemList.condition}}</div>
+              </div>
+            </div>
+            <div class="commentList col-xs-12 zeroPadding" *ngIf="listComments">
+              <div class="col-xs-12 zeroPadding chatMsg form-group">
+                <div class="listItemMsg col-xs-12" *ngFor="let list of itemList.commentData; let i =index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+                  <span *ngIf="list.commentBody != null">
+                    <span class="chatUserNamr cursorPointer" (click)="memberProfile(list.commentedByUser)" style="text-transform: capitalize;color:#484848"
+                      *ngIf="token">
+                      <b>{{list.commentedByUser}} : </b>
+                    </span>
+                    <span class="colorGray chatMsgList" style="word-break: break-all;" [innerHtml]="list.commentBody"></span>
+                    <span class="colorGrayLight chatMsgList pull-right">{{list.commentedOn}}
+                      <i class="ion-ios-trash-outline cursorPointer" (click)="deleteComment(list, i, itemList.postType, itemList.postId)"></i>
+                    </span>
+                  </span>
+                </div>
+                <div class="col-xs-12 padMoree text-center cursorPointer color" *ngIf="itemList.totalComments > 5 && !allComment && token"
+                  (click)="allCommentsList();">{{item.viewAll}} {{itemList.totalComments}} {{item.comments}}</div>
+              </div>
+              <div class="textAreaList col-xs-12 zeroPadding form-group">
+                <textarea class="inputTextarea col-xs-12 padMoree" [(ngModel)]="textAreaMsg" maxlength="120" #pt (keyup)="postTextArea(pt.value)"
+                  cols="4" rows="4" name="" style="resize:none;border-radius: 5px;" placeholder="{{typeYourMessage}}"></textarea>
+              </div>
+              <div class="sizeSmall">{{item.youHave}}
+                <span *ngIf="!lengthTextarea">{{item.one120}}</span>
+                <span class="" *ngIf="lengthTextarea">{{120 - lengthTextarea}}</span> {{item.characterLeft}}</div>
+              <div class="postCommentsButton col-xs-12 zeroPadding">
+                <button type="button" class="btn pull-right postChat" (click)="postCommentSend(itemList.postType, itemList.postId)" [disabled]="!textAreaMsg">{{item.postComment}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="itemPriceList text-center form-group boxShadowList col-xs-12 zeroPadding" *ngIf="itemList">
+          <div class="PriceHeader col-xs-12">
+            {{item.price}}
+          </div>
+          <div class="padMore col-xs-12">
+            <div class="col-xs-12 zeroPadding form-group">
+              <span class="color dollarSize">{{itemList.currency}}</span>
+              <span class="prizeSize">{{itemList.price}}</span>
+            <span class="color dollarSize">
+                <img class="bitcoinCurrency" src="assets/images/bitcoinCurrency.png">
+              </span>
+              <span class="prizeSize">{{itemList.bitCoinPrice.toFixed(8)}} BTC</span>
+              <br> {{itemList.priceInUSD.toFixed(2)}} USD
+            </div>
+            <div class="watchList boxShadowList1 zeroPadding cursorPointer col-xs-6" *ngIf="!followOpen && itemList && loginUsername != itemList.membername">
+              <div class="askList col-xs-12 text-cente cursorPointer" data-toggle="modal" data-target="#followItemPopup" (click)="followerButton(itemList.membername)"
+                *ngIf="itemList.followRequestStatus == null">
+                <span class="color">
+                  <i class="ion-person-stalker"></i> {{item.follow}}</span>
+              </div>
+              <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(itemList.membername)" *ngIf="itemList.followRequestStatus == 1">
+                <span class="hoverFollowing">{{item.following}}</span>
+                <span class="hoverunFollow">{{item.unFollow}}</span>
+              </div>
+            </div>
+            <div class="watchList cursorPointer boxShadowList1 col-xs-6 form-group paddingRight" *ngIf="itemList">
+              <div class="askList col-xs-12 text-center" (click)="watchList(0, itemList.postType)" *ngIf="itemList.likeStatus == 0">
+                <span class="color">
+                    <i class="ion-ios-heart"></i> {{item.watch}}</span>
+              </div>
+              <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="watchList(1, itemList.postType)" *ngIf="itemList.likeStatus == 1">
+                <span class="hoverFollowing">{{item.watching}}</span>
+                <span class="hoverunFollow">{{item.unWatch}}</span>
+              </div>
+            </div>
+            <div class="col-xs-12 zeroPadding form-group" (click)="makeOfferPriceEmpty()" *ngIf="itemList.membername != itemList.username"
+              data-toggle="modal" data-target="#makeOffer">
+              <span class="offerButton btn">{{item.makeOffer}}</span>
+            </div>
+            <div class="askList cursorPointer col-xs-12" data-toggle="modal" data-target="#askItemPopup">
+              <span class="color">
+                <i class="ion-ios-chatbubble"></i> Ask</span>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="sellerList form-group boxShadowList col-xs-12 zeroPadding" *ngIf="followers && followOpen && itemList">
+          <div class="PriceHeader text-center col-xs-12 cursorPointer" data-toggle="modal" data-target="#memberFollowers">
+            {{item.followers}} ({{followers.length}})
+          </div>
+          <div class="col-xs-12 padMore">
+            <div class="col-xs-12 zeroPadding form-group">
+              <div class="boxLargeInner imgFollowers" *ngFor="let followersImg of followers">
+                <img class="borerRadius" src="{{followersImg.profilePicUrl}}" (click)="memberProfile(followersImg.username)" width="46" height="46"
+                  onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+              </div>
+            </div>
+            <div class="askList col-xs-12 text-center cursorPointer" (click)="followerButton(itemList.membername)" *ngIf="itemList.followRequestStatus == null"
+              data-toggle="modal" data-target="#followItemPopup">
+              <span class="color">
+                  <i class="ion-person-stalker"></i> {{item.follow}}</span>
+            </div>
+            <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(itemList.membername)" *ngIf="itemList.followRequestStatus == 1">
+              <span class="hoverFollowing">{{item.following}}</span>
+              <span class="hoverunFollow">{{item.unFollow}}</span>
+            </div>
+          </div>
+        </div> -->
+        <div class="sellerList form-group boxShadowList col-xs-12 zeroPadding" *ngIf="itemList">
+          <div class="PriceHeader col-xs-12">
+            <span class="pull-left sellerTitle" [class.active]="loginUsername != itemList.membername" style="font-weight: 600;">{{item.seller}}</span>
+            <span class="watchList boxShadowList1 zeroPadding cursorPointer pull-right" *ngIf="loginUsername != itemList.membername">
+              <div class="askList col-xs-12 text-cente cursorPointer" (click)="followerButton(itemList.membername)" *ngIf="itemList.followRequestStatus == null">
+                <span class="color">
+                  <i class="ion-person-stalker"></i> {{item.follow}}</span>
+              </div>
+              <div class="askList btnFollowing cursorPointer col-xs-12 text-center" (click)="unFollowButton(itemList.membername)" *ngIf="itemList.followRequestStatus == 1">
+                <span class="hoverFollowing">{{item.following}}</span>
+                <span class="hoverunFollow">{{item.unFollow}}</span>
+              </div>
+            </span>
+          </div>
+          <div class="col-xs-12 padMore">
+            <div class="boxLargeInner col-xs-12 zeroPadding">
+              <div class="pull-left">
+                <img class="sellerImg cursorPointer" (click)="memberProfile(itemList.membername)" src="{{itemList.memberProfilePicUrl}}"
+                  onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+              </div>
+              <div class="pull-left text-left" style="line-height: 30px;">
+                <span class="sizeMedium cursorPointer" (click)="memberProfile(itemList.membername)">{{itemList.memberFullName}}</span>
+                <br>
+                <span class="socialMediaIcons">
+                  <img class="" *ngIf="itemList.facebookVerified == 1" src="{{item.settingsFBOn}}" title="Facebook Connected" alt="Facebook Connected">
+                  <!-- <img class="" *ngIf="itemList.facebookVerified != 1" title="Facebook Not Connected" src="{{item.settingsFBOff}}" alt="Facebook Not Connected"> -->
+                  <img class="" *ngIf="itemList.googleVerified == 1" src="{{item.settingsGOn}}" alt="Google+ Connected" title="Google+ Connected">
+                  <!-- <img class="" *ngIf="itemList.googleVerified != 1" src="{{item.settingsGOff}}" alt="Google+ Not Connected" title="Google+ Not Connected"> -->
+                  <img class="marginPadding" *ngIf="itemList.emailVerified == 1" title="Google+ Verified" src="{{item.settingsEmailOn}}" alt="Google+ Verified">
+                  <!-- <img class="marginPadding" *ngIf="itemList.emailVerified != 1" (click)="emailClick();" title="Email Not Verified" src="{{item.settingsEmailOff}}" -->
+                    <!-- alt="Email Not Verified"> -->
+                    <span class="sizeSmall" *ngIf="itemList.facebookVerified != 1 && itemList.googleVerified != 1 && itemList.emailVerified != 1">USER NOT VERIFIED YET!</span>
+                </span>
+              </div>
+              <div class="sellerList col-xs-12 zeroPadding" *ngIf="followers && followOpen && itemList">
+                <div class="PriceHeader1 padMoree paddingRight paddingLeft cursorPointer sizeSmall" data-toggle="modal" data-target="#memberFollowers">
+                  <!-- {{item.followers}} ({{followers.length}}) -->
+                  Followed by
+                </div>
+                <div class="col-xs-12 zeroPadding form-group" *ngIf="followers">
+                  <div class="boxLargeInner imgFollowers" *ngFor="let followersImg of followers">
+                    <img class="borerRadius" src="{{followersImg.profilePicUrl}}" title="{{followersImg.username}}" (click)="memberProfile(followersImg.username)"
+                      width="30" height="30" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"
+                      style="border-radius:30px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="sizeMedium cursorPointer" (click)="memberProfile(itemList.membername)">{{itemList.memberFullName}}</div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 zeroPadding recentList form-group">
+        <div class="listHeaderTitle itemImageContent  col-xs-12 zeroPadding">
+          <div class="PriceHeader col-xs-12">
+            <b>{{item.myOtherOffers}}</b>
+          </div>
+        </div>
+        <div class="itemAllCollection" id="columns" *ngIf="offerListLength && otherOffer" style="padding-top: 10px;">
+          <figure class="listImageItem boxShadowList" *ngFor="let offer of otherOffer">
+            <div class="allListRecent cursorPointer" (click)="itemDetails(offer.postId)">
+              <div class="imgRecent">
+                <img class="" src="{{offer.mainUrl}}" onError="this.src='assets/images/lazyLoad.png';" alt="{{offer.seoTitle}}" title="{{offer.seoTitle}}">
+              </div>
+              <div class="recentContentList col-xs-12">
+                <div class="itemTitle textEllipse col-xs-12 colorGray">{{offer.productName}}</div>
+                <div class="itemPrice color col-xs-12 zeroPadding">
+                  {{offer.currency}} {{offer.price}}
+                  <!-- <div class="pull-left">
+                      <img class="bitcoinCurrency" src="assets/images/bitcoinCurrency.png">
+                    </div>
+                    <div class="bitCoinBtc">
+                      {{offer.bitCoinPrice.toFixed(8)}} BTC
+                      <br> {{offer.priceInUSD.toFixed(2)}} USD
+                    </div> -->
+                </div>
+                <!-- <div class="itemDistance textEllipse col-xs-12 zeroPadding color">
+                    <i class="ion-ios-location"></i>
+                    <span *ngIf="offer.distance != null">{{offer.distance.toFixed(2)}} Km ·</span> {{offer.city}}, {{offer.countrySname}}</div> -->
+              </div>
+            </div>
+          </figure>
+        </div>
+        <div class="col-xs-12 zeroPadding errorData boxShadowList" *ngIf="!offerListLength">
+          <div class="col-xs-12 padMore text-center">No Offer Found</div>
+          <!-- <img class="col-xs-12 zeroPadding" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/myoffer_nooffers.png"> -->
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <br>
+</div>
+
+
+<!-- item popup -->
+<div class="modal fade itemPopupAll" id="makeOffer" role="dialog">
+  <div class="modal-dialog" style="margin-top:5%;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-body col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+        <div class="offerList col-xs-12 padMore" style="background:#ececec;">
+          <div class="col-xs-12 col-sm-4 listImageItem form-group paddingLeft" *ngIf="itemList">
+            <div class="allListRecent boxShadowList col-xs-12 zeroPadding cursorPointer" data-dismiss="modal" (click)="itemDetails(itemList.postId)">
+              <div class="imgRecent">
+                <img class="col-xs-12 zeroPadding" src="{{itemList.mainUrl}}" alt="{{itemList.seoTitle}}" title="{{itemList.seoTitle}}">
+              </div>
+              <div class="recentContentList col-xs-12">
+                <div class="itemTitle textEllipse col-xs-12 zeroPadding colorGray">{{itemList.productName}}</div>
+                <div class="itemPrice col-xs-12 zeroPadding">
+                  {{itemList.currency}} {{itemList.price}}
+                  <!-- <div class="pull-left">
+                    <img class="bitcoinCurrency" src="assets/images/bitcoinCurrency.png">
+                  </div>
+                  <div class="bitCoinBtc">
+                    <span class="color">{{itemList.bitCoinPrice.toFixed(8)}} BTC</span>
+                    <br> {{itemList.priceInUSD.toFixed(2)}} USD
+                  </div> -->
+                </div>
+                <!-- <div class="itemDistance textEllipse col-xs-12 zeroPadding color">
+                  <i class="ion-ios-location"></i> miles · Bengaluru, IN</div> -->
+              </div>
+              <div class="OwnerInfo col-xs-12">
+                <span class="OwnerInfoPic">
+                  <img class="OwnerInfoImg" src="{{itemList.thumbnailImageUrl}}">
+                </span>
+                <span class="OwnerInfoTitle">{{itemList.membername}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-8 listmakeOffer paddingRight" *ngIf="!offerSent && itemList">
+            <div class="boxShadowList contentOffer text-center col-xs-12 padMore">
+              <h1 class="sizeMedium olorGray">
+                <b>{{item.readyBuyHit}}</b>
+              </h1>
+              <div class="sizeLarge colorGray col-xs-12" style="font-size: 1.2em;">
+                {{itemList.currency}}{{itemList.price}}
+                <!-- <span class="color dollarSize">
+                  <img class="bitcoinCurrency" src="assets/images/bitcoinCurrency.png">
+                </span>
+                <span class="prizeSize">{{itemList.bitCoinPrice.toFixed(8)}} BTC</span>
+                <br> {{itemList.priceInUSD.toFixed(2)}} USD -->
+              </div>
+
+              <div class="sizeLarge colorGray col-xs-12 form-group">
+                <input type="text" *ngIf="itemList.negotiable != 0" [(ngModel)]="makeOfferPrice" class="formControlOffer" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="text" *ngIf="itemList.negotiable == 0" [(ngModel)]="itemList.price" class="formControlOffer makeOfferPrice"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+              </div>
+              <div class="buttonoffer col-xs-12">
+                <button class="sizeLarge offerPopupButton" (click)="makeOffer(itemList)" type="button">{{item.offer}}</button>
+              </div>
+              <div class="">{{item.notSure}}
+                <a class="cursorPointer textDecorationLine colorGreen" data-dismiss="modal" data-toggle="modal" data-target="#askItemPopup">{{item.ask}}</a> {{item.forMoreInfo}}.
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-8 listmakeOffer paddingRight" *ngIf="offerSent">
+            <div class="boxShadowList contentOffer text-center col-xs-12 padMore">
+              <h1 class="sizeLarge colorGray">
+                <b>{{item.offerSent}}</b>
+              </h1>
+              <div class="sizeLarge colorGray col-xs-12 form-group">
+                <span class="priceListOffer">{{item.currency}}{{item.makeOfferPrice}}</span>
+              </div>
+              <div class="col-xs-12 zeroPadding form-group">
+                {{item.offerSent}}
+                <br> {{item.orBetterDownloadApp}}
+              </div>
+              <h3 class="colorGray">{{item.getApp}}</h3>
+              <div class="col-xs-12 zeroPadding">
+                <!-- <span class="">
+                  <img class="stroeIcon" data-dismiss="modal" data-toggle="modal" data-target="#sellModalhow" src="{{item.itemGooglePlay}}"
+                    alt="">
+                </span>
+                <span class="">
+                  <img class="stroeIcon" data-dismiss="modal" data-toggle="modal" data-target="#sellModalhow" src="{{item.itemAppStore2}}"
+                    alt="">
+                </span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- report popup -->
+
+<div class="modal fade itemPopupAll" id="reportItemPopup" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="modal-body col-xs-12 zeroPadding padMoree">
+        <div class="nameImg col-xs-12 zeroPadding form-group" *ngIf="itemList && reportList">
+          <span class="pull-left">
+            <img class="borerRadiusImg" width="50" height="50" src="{{itemList.mainUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+          </span>
+          <span class="textReportTitle">
+            <div class="">{{itemList.productName}}</div>
+            <div class="sizeSmall">{{item.soldBy}}
+              <b>{{itemList.membername}}</b>
+            </div>
+          </span>
+        </div>
+        <div class="col-xs-12 zeroPadding form-group" *ngIf="reportList && reportDes">
+          <div class="col-xs-12 zeroPadding form-group">{{item.whyReport}}</div>
+          <ul class="listnone col-xs-12 zeroPadding">
+            <li class="reportLi" *ngFor="let list of reportList" (click)="reportReason(list)">{{list.reportReason}}</li>
+          </ul>
+        </div>
+        <div class="col-xs-12 zeroPadding form-group" *ngIf="!reportDes && reportList">
+          <div class="col-xs-12 zeroPadding form-group">{{item.additionalNote}}</div>
+          <div class="col-xs-12 zeroPadding form-group">
+            <textarea cols="40" maxlength="1000" name="message" rows="10" [(ngModel)]="reportDescription" placeholder="{{item.pleaseWriteNote}}"
+              class="col-xs-12 padMoree borerRadius id_message"></textarea>
+          </div>
+          <div class="col-xs-12 zeroPadding">
+            <button class="btn btnData col-xs-12" [disabled]="!reportDescription" (click)="reportPostItem()" type="button">{{item.done}}</button>
+          </div>
+        </div>
+        <div class="col-xs-12 zeroPadding form-group text-center" *ngIf="!reportList && !reportDes">
+          <h1 class="col-xs-12 zeroPadding form-group sizeLarge">{{successReport}}</h1>
+          <img src="https://d2fa3j67sd1nwo.cloudfront.net/images/activated_check.8b66d49fc938.png" alt="" height="100" width="100">
+          <p *ngIf="!reportErr">{{item.thanksTakingTime}}</p>
+          <p *ngIf="reportErr">{{item.reportErr}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ask popup -->
+
+<div class="modal fade itemPopupAll" id="askItemPopup" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="modal-body col-xs-12 zeroPadding padMoree">
+        <div class="nameImg sizeLarge col-xs-12 zeroPadding form-group" *ngIf="itemList">
+          <img class="borerRadius" width="50" height="50" src="{{itemList.mainUrl}}"> {{itemList.membername}}
+        </div>
+        <div class="col-xs-12 zeroPadding form-group">
+          <textarea cols="40" maxlength="1000" name="message" rows="10" placeholder="{{item.enterQuestionPlaceHolder}}" class="col-xs-12 padMoree borerRadius id_message"></textarea>
+        </div>
+        <div class="col-xs-12 zeroPadding">
+          <button class="btn btnData col-xs-12" data-dismiss="modal" (click)="sellPopup()" type="button">{{item.send}}</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- follow popup -->
+
+<div class="modal fade itemPopupAll" id="followItemPopup" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="text-center col-xs-12 zeroPadding padMoree" *ngIf="itemList">
+        <h1 class="sizeLarge">{{item.nowFollowing}}
+          <br> {{itemList.membername}} {{offers}}</h1>
+        <div class="nameImg sizeLarge col-xs-12 zeroPadding form-group">
+          <img class="borerRadius followImg" (click)="memberProfile(itemList.membername)" src="{{itemList.memberProfilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- map function-->
+
+
+
+<div class="modal fade itemPopupAll" id="mapItemPopup" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 padMoree">
+        <div class="col-xs-11 zeroPadding textTransform" *ngIf="itemList && itemList.city">{{itemList.city}}, {{itemList.countrySname}}</div>
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="text-center col-xs-12 zeroPadding">
+        <div class="map" id="map"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- getMemberFollowers -->
+<div class="modal fade itemPopupAll" id="memberFollowers" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+      </div>
+      <div class="modal-body col-xs-12 zeroPadding padMoree">
+        <h1 class="sizeLarge col-xs-12 colorGray" *ngIf="itemList">{{itemList.membername}} {{item.follower}}</h1>
+        <div class="borerRadius col-xs-12 zeroPadding allListFollower form-group" *ngIf="followers">
+          <div class="memberFollowerPopup col-xs-12" *ngFor="let followersImg of followers;let i = index;">
+            <div class="pull-left cursorPointer" style=" width: 50px;" (click)="memberProfile(followersImg.username)">
+              <img class="borerRadius followerImg" width="46" height="46" src="{{followersImg.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+            </div>
+            <div class="pull-left memberUserName cursorPointer" (click)="memberProfile(followersImg.username)">
+              {{followersImg.username}}
+            </div>
+            <div class="pull-right followFollower" *ngIf="followersImg.username != loginUsername">
+              <button class="btn color btnFollow" type="button" *ngIf="followersImg.userFollowRequestStatus  == null" (click)="followerButton(followersImg.username, i)">
+                <i class="ion-person-stalker"></i> {{item.follow}}</button>
+              <button class="btn btnFollow btnFollowing" type="button" *ngIf="followersImg.userFollowRequestStatus == 1" (click)="unFollowButton(followersImg.username, i)">
+                <span class="hoverunFollow">{{item.unFollow}}</span>
+                <span class="hoverFollowing">{{item.following}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- sell on popup -->
+<div class="sellModalhow modal fade" id="sellModalhow" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-body sellPopup col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="color:initial;">&times;</button>
+        <div class="col-xs-12 contentSell" *ngIf="!succesSeller">
+          <h1 class="text-center colorGray padMore" style="margin: 0px 0 30px;">{{item.comingSoon}}</h1>
+
+          <!-- <h1 class="text-center colorGray">Send app link</h1>
+          <div class="phonOrEmail col-xs-12 padMore text-center" *ngIf="!howPopupSuccess">
+            <div class="emailList col-xs-12 zeroPadding">
+              <img class="howPopupImg" src="assets/images/howEmail.png">
+              <input type="text" name="sellEmail" [(ngModel)]="sellEmail" #hv (keyup)="emailValidation(hv.value)" (change)="emailValidation(hv.value)"
+                class="inputEmail form-control input-lg" placeholder="your-email@domain.com">
+            </div>
+            <h5 class="errorMsg" *ngIf="email_Error">Please provide a valid email address...</h5>
+            <div class="colorGray col-xs-12 zeroPadding">
+              <b>or</b>
+            </div>
+            <div class="phoneList col-xs-12 zeroPadding form-group">
+              <img class="howPopupImg" src="assets/images/howPhone.png">
+              <input type="text" name="sellPhone" [(ngModel)]="sellPhone" #hp (keyup)="mobileValidation(hp.value)" (change)="mobileValidation(hp.value)"
+                class="inputEmail form-control input-lg" placeholder="123-456-7890">
+            </div>
+            <h5 class="errorMsg" *ngIf="phone_Error">Please try entering your full number, including the country code. </h5>
+            <h5 class="errorMsg" *ngIf="PEerror">{{PEerror}}</h5>
+            <div class="sendSell submitLogin col-xs-12 zeroPadding">
+              <button type="button" class="btn btnSubmit" (click)="sellHowSend()" [disabled]="!(registerSave)">Send</button>
+            </div>
+          </div>
+          <div class="successTextHow col-xs-12 padMore text-center" *ngIf="howPopupSuccess">
+            <h3>You have recently requested the app.</h3>
+            <p style="margin-top:20px">It may take a few minutes for you to receive it.</p>
+            <p>Please wait about 5 minutes
+              <br> to make another request.</p>
+          </div> -->
+        </div>
+        <div class="col-xs-12 sellMobileImg text-center" *ngIf="succesSeller">
+          <br>
+          <br>
+          <br>
+          <h1 class="sizeLarge">{{item.thankYou}}</h1>
+          <h1 class="sizeMedium">{{item.fewMinsReceive}}.</h1>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Succes Popup for MakeOffer and Ask Question -->
+<div class="modal fade itemPopupAll" id="successPopup" role="dialog">
+  <div class="modal-dialog" style="margin-top:100px !important;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-header col-xs-12 zeroPadding">
+        <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;margin:10px;">&times;</button>
+      </div>
+      <div class="modal-body col-xs-12 zeroPadding padMoree text-center">
+        <div class="col-xs-12 text-center">
+          {{successReport}}
+        </div>
+        <!-- <div class="nameImg sizeLarge col-xs-12 zeroPadding form-group" *ngIf="itemList">
+          <img class="borerRadius" width="50" height="50" src="{{itemList.mainUrl}}"> {{itemList.membername}}
+        </div>
+        <div class="col-xs-12 zeroPadding form-group">
+          <textarea cols="40" maxlength="1000" name="message" rows="10" placeholder="{{item.enterQuestionPlaceHolder}}" class="col-xs-12 padMoree borerRadius id_message"></textarea>
+        </div>
+        <div class="col-xs-12 zeroPadding">
+          <button class="btn btnData col-xs-12" data-dismiss="modal" type="button">{{item.send}}</button>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- sell in stuff -->
+<div class="modal fade" id="deletePost" data-backdrop="static" data-keyboard="false" role="dialog" style="background-color: rgba(238, 238, 238, 0.95);">
+  <div class="modal-dialog" style="margin-top: 15%;">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body" style="display:inline-block;width:100%;">
+        <h4 class="col-xs-12 titleH3 text-center">Are you sure want to delete your listing?</h4>
+        <br>
+        <br>
+        <div class="col-xs-12 zeroPadding text-right">
+          <span class="textDanger" data-dismiss="modal">Cancel</span>
+          <span class="textDanger" (click)="deletePost()">Delete</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- sell in stuff -->
+<div class="modal fade sellModals" id="sellModals" data-backdrop="static" data-keyboard="false" role="dialog" style="background-color: rgba(238, 238, 238, 0.95);">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content" *ngIf="postEdit">
+      <div class="modal-body" style="display:inline-block;">
+        <div class="closeIcon" data-dismiss="modal">X</div>
+        <div class="collectionImg col-xs-12">
+          <h3 class="col-xs-12 titleH3 text-center">Edit Product Listing</h3>
+          <h4 class="col-xs-12 zeroPadding">Add photos of your product</h4>
+          <div class="col-xs-12 editImagesell zeroPadding cursorPointer">
+            <span class="listImg" *ngIf="imgUrl && imgUrl.length > 0">
+              <span class="imagsProduct" *ngFor="let img of imgUrl">
+                <img class="sellImg sellImgs" src="{{img.img}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+                <span class="imgCancel ion-close-circled" (click)="removeImg(i)"></span>
+              </span>
+            </span>
+            <span class="emptyImg" *ngIf="imgUrl && imgUrl.length < 5">
+              <input type="file" id="uploadSellInput" name="image" accept="image/*" class="yeloProfileImage" (change)="fileUploader()"
+                ng2FileSelect [uploader]="uploader" multiple>
+            </span>
+          </div>
+          <div class="col-xs-12 zeroPadding">
+            <h5 style="color: #FF4081;" *ngIf="imgUrl.length == 0"> At least one photo is mandatory</h5>
+            <h5 style="color: #FF4081;" *ngIf="imgUrl.length > 0"> Add upto {{5 - imgUrl.length }} more photo(optional)</h5>
+            <h5 style="color: #FF4081;" *ngIf="imgUrl.length == 5"> Product Image Maximum five...</h5>
+          </div>
+        </div>
+        <hr class="col-xs-12 zeroPadding">
+        <div class="formLists col-xs-12 zeroPadding">
+          <div class="sellingList col-xs-12 col-sm-6">
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">What you are selling? </label>
+              <input type="text" name="productName" [(ngModel)]="postEdit.productName" class="form-control inputBox" placeholder="Add Title">
+              <textarea name="productDescription" [(ngModel)]="postEdit.description" class="form-control inputBox" rows="4" cols="4" placeholder="Description"
+                style="resize:none;height:auto"></textarea>
+            </div>
+            <div class="formList col-xs-12 zeroPadding" *ngIf="catList">
+              <label class="labels col-xs-12 zeroPadding">What is your product based on? </label>
+              <select name="category" [(ngModel)]="postEdit.category" #sCa (change)="selectCat(sCa.value);" class="form-control inputBox">
+                <option value="{{list.name}}" *ngFor="let list of  catList">{{list.name}}</option>
+              </select>
+              <!-- <select name="" class="form-control inputBox">
+                  <option value="">test</option>
+                </select> -->
+            </div>
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Where is the product located? </label>
+              <input type="text" name="place" [(ngModel)]="postEdit.place" class="form-control inputBox" id="sellLocates" (keyup)="changeLocation()"
+                placeholder="Where you sell the item">
+              <input type="hidden" name="" value="{{postEdit.latitude}}" id="latP" class="headerSearch form-control">
+              <input type="hidden" name="" value="{{postEdit.longitude}}" id="lngP" class="headerSearch form-control">
+              <input type="hidden" name="" value="{{postEdit.city}}" id="cityP" class="headerSearch listNew form-control">
+              <input type="hidden" name="" value="{{postEdit.countrySname}}" id="stateP" class="headerSearch listNew form-control">
+              <input type="hidden" name="" value="{{postEdit.place}}" id="locateP" class="headerSearch listNew form-control">
+            </div>
+          </div>
+          <div class="priceLists col-xs-12 col-sm-6">
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Price </label>
+              <div class="col-xs-8 col-sm-10 zeroPadding">
+                <input type="text" name="price" [(ngModel)]="postEdit.price" class="form-control inputBox" placeholder="Product Price">
+              </div>
+              <div class="col-xs-4 col-sm-2 zeroPadding">
+                <select name="currency" [(ngModel)]="postEdit.currency" #sC (change)="selectCurrency(sC.value);" class="form-control inputBox zeroPadding">
+                  <option *ngFor="let item of currencyList" value="{{item.value}}">{{item.value}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Product Condition</label>
+              <select name="condition" [(ngModel)]="postEdit.condition" #cC (change)="selectCondition(cC.value);" class="form-control inputBox">
+                <option value="Select Product Condition" disabled selected>Select Product Condition</option>
+                <option value="Other(see description)">Other(see description)</option>
+                <option value="For Parts">For Parts</option>
+                <option value="Used(normal wear)">Used(normal wear)</option>
+                <option value="Open Box(never used)">Open Box(never used)</option>
+                <option value="Reconditioned/Certified">Reconditioned/Certified</option>
+                <option value="New(Never Used)">New(Never Used)</option>
+              </select>
+            </div>
+            <div class="formList col-xs-12 zeroPadding">
+              <!-- <label class="labels col-xs-12 zeroPadding">Share your stuff ?</label> -->
+              <div class="toggleSwitch col-xs-12 zeroPadding">
+                <span class="titleSwitch" style="color: #000000ba;font-weight:bold;">
+                  Negotiable
+                </span>
+                <span class="changeSitch pull-right">
+                  <label class="switch">
+                    <input type="checkbox" [checked]="postEdit.negotiable == 1" #st (change)="switchToggle(st.checked);">
+                    <span class="slider round"></span>
+                  </label>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 buttonPost">
+            <h5 class="col-xs-12 text-center" style="color: #FF4081;" *ngIf="errMsg"> {{errMsg}}</h5>
+            <div class="loader loginPage loaderGif" *ngIf="loaderButton" style="top: 6px !important;left: 55px;"></div>
+            <button type="button" class="btn btnPost" (click)="updatePost(postEdit)">Update</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

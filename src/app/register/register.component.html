@@ -1,0 +1,190 @@
+<title *ngIf="data">{{data.title}}</title>
+<div class="containerDark" style="min-height:40em">
+</div>
+<div class="popupChangeSocial">
+  <div class="itemSellLocally1 col-xs-12 zeroPadding">
+    <div class="container-dark">
+
+    </div>
+    <div class="container-mid-float">
+      <div class="clear-fix text-center">
+        <!-- <div class="reg-signup-intro-text mgbtm0">
+        <p>sign up with
+          <span class="intro-logo">
+            <img src="assets/images/logo_bottom.svg" width="132">
+          </span> Las Vegas's Hottest ICO</p>
+      </div>
+    </div>
+    <div class="col-md-12 offer text-center mgbtm0">
+      <p>Early Bird Sign Ups Receive A
+        <span class="impText">Free</span> $150 in Ad Credits </p>
+    </div> -->
+        <button type="button" class="close cancelButton" routerLink="">&times;</button>
+
+        <div class=" form-box clear-fix">
+          <div class="col-md-6 col-sm-12 fix-height form-side-banner padding-zero hide-for-smallscreen">
+            <img class="fix-height" src="{{registerSub.formBackground}}">
+          </div>
+
+          <div class="col-md-6 col-sm-12 fix-height background-fade">
+            <!-- <div class="row h170">
+          <div class="col-md-12">
+            <div class="emptydiv25" style="height:20px;"></div>
+          </div>
+          <div class="col-md-12 timer-launch text-center">
+            <p>LAUNCHING SOON</p>
+
+          </div>
+
+          <div class="col-md-12">
+            <div class="timer text-center">
+              <div id="clock"></div>
+
+              <div id="countdown">
+
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+
+            <div class="col-md-12">
+              <div class="emptydiv25"></div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-logo text-center">
+                <b>{{registerSub.signUpWith}} </b>
+                <img src="{{registerSub.registerLogo}}" style="width:90px;vertical-align: top;">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="emptydiv25"></div>
+            </div>
+            <!-- <div class="col-md-12">
+        <div class="col-md-6 col-sm-6 col-xs-6 social-connect-section">
+          <img class="width-fix" src="assets/images/logo-facebook.png">
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 social-connect-section">
+          <img class="width-fix" src="assets/images/logo-gmail.png">
+        </div>
+      </div>
+       -->
+            <!-- <div class="col-md-12">
+        <hr class="hr">
+        <span class="float-option-text">OR</span>
+      </div> -->
+
+            <div class="SocialLink fbreg col-xs-12 zeroPadding form-group" [hidden]="LoginFb">
+              <div class="linkContent text-center col-xs-12 zeroPadding">
+                <span class="borderLine"></span>
+                <span class="borderLineText">QUICKLY CONNECT WITH</span>
+              </div>
+              <div class="socialLoginButton col-xs-12 padMore">
+                <div class="loaderGif" *ngIf="loaderButtonfb"></div>
+                <div type="button" class="socialButton loginFb form-group" (click)="onFacebookLoginClick()">
+                  Continue with Facebook
+                  <i class="socialIon ion-social-facebook"></i>
+                </div>
+                <!-- <div type="button" class="socialButton logingoogle" (click)="onGoogleLoginClick()">
+                  Continue with Google
+                  <i class="socialIon ion-social-google"></i>
+                </div> -->
+              </div>
+              <div class="linkContent text-center col-xs-12 zeroPadding">
+                <span class="borderLine"></span>
+                <span class="borderLineText">OR USE YOUR EMAIL</span>
+              </div>
+            </div>
+
+            <div class="row fbregErr" [hidden]="!LoginFb">
+              <div class="input-form">
+                <div class="col-md-12 text-muted input-div">
+                  <div class="col-md-5">
+                    <p class="input-header pad-top-5">{{registerSub.name}}</p>
+                  </div>
+                  <div class="col-md-7">
+                    <input type="text" [(ngModel)]="fullName" id="fullname">
+                  </div>
+                  <div class="errorMsg col-md-7 text-center" *ngIf="registerfullErrMsg">{{registerSub.fullNameMissing}}</div>
+                </div>
+                <div class="col-md-12 text-muted input-div">
+                  <div class="col-md-5">
+                    <p class="input-header pad-top-5">{{registerSub.userName}}</p>
+                  </div>
+                  <div class="col-md-7">
+                    <input class="input-data" type="text" #uc [(ngModel)]="userName" (change)="usernameCheck(uc.value)" id="username">
+                  </div>
+                  <div class="errorMsg col-md-7 text-center" *ngIf="registerUserErrMsg">{{registerUserErrMsg}}</div>
+                </div>
+                <div class="col-md-12 text-muted input-div">
+                  <div class="col-md-5">
+                    <p class="input-header pad-top-5">{{registerSub.email}}</p>
+                  </div>
+                  <div class="col-md-7">
+                    <input type="text" [(ngModel)]="email" #ev (keyup)="emailValidation(ev.value)" id="email" (change)="emailValidationCheck(ev.value)">
+                  </div>
+                  <div class="errorMsg col-md-7 text-center" *ngIf="registerEmailErrMsg">{{registerEmailErrMsg}}</div>
+                </div>
+                <div class="col-md-12 text-muted input-div">
+                  <div class="col-md-5">
+                    <p class="input-header pad-top-5 ">{{registerSub.phoneNumber}}</p>
+                  </div>
+                  <div class="col-md-7 registerSignupCountrycode">
+                    <input type="text" [(ngModel)]="phoneNumber" #pv (keyup)="mobileValidation(pv.value)" id="phone" (change)="phonenumberCheck(pv.value)">
+                  </div>
+                  <div class="errorMsg col-md-7 text-center" *ngIf="registerPhoneErrMsg">{{registerPhoneErrMsg}}</div>
+                </div>
+                <div class="col-md-12 text-muted input-div">
+                  <div class="col-md-5">
+                    <p class="input-header pad-top-5">{{registerSub.password}}</p>
+                  </div>
+                  <div class="col-md-7">
+                    <input class="input-data" type="password" [(ngModel)]="password">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="notify">
+                  {{registerSub.connectFBLogin}}
+                  <span>
+                    <a routerLink="../terms">{{registerSub.termsService}}</a>
+                  </span> {{registerSub.and}}
+                  <span>
+                    <a routerLink="../privacy">{{registerSub.privacyPolicy}}</a>
+                  </span>
+                </p>
+              </div>
+
+              <div class="col-md-12 text-center loginPage" [hidden]="!LoginFb">
+                <input type="hidden" id="googleId">
+                <input type="hidden" id="googleToken">
+                <div class="loaderGif" *ngIf="loaderButton" style="top: 10px;"></div>
+                <button class="sign-up sign-in-button loginPage1" (click)="register()">{{registerSub.signUp}}</button>
+                <button class="sign-up sign-in-button loginPage2 hide" (click)="fbRegisterlogin()">{{registerSub.signUp}}</button>
+                <button class="signUp sign-in-button googlePage hide" (click)="googleRegister()">{{registerSub.signUp}}</button>
+              </div>
+              <div class="errorMsg col-md-12 col-xs-12 text-center" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+              <div class="col-md-12">
+                <div class="emptydiv25"></div>
+              </div>
+              <div class="col-md-12 fbreg text-center form-footer zeroPadding" *ngIf="!LoginFb">
+                Create a new account?
+                <span class="log-in-button" (click)="LoginFb = !LoginFb"> Sign up </span>
+              </div>
+              <div class="col-md-12 text-center form-footer zeroPadding" *ngIf="LoginFb">
+                Sign up With Facebook?
+                <span class="log-in-button" (click)="LoginFb = !LoginFb"> Facebook Sign up </span>
+              </div>
+              <div class="col-md-12 text-center form-footer">
+                {{registerSub.alreadyRegistered}}
+                <span class="log-in-button" routerLink="../login"> {{registerSub.logIn}} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

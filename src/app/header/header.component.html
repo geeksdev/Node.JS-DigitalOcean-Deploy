@@ -1,0 +1,766 @@
+<div class="whiteLayer" *ngIf="!searchLayer"></div>
+
+<nav class="navbar headerMenu loginDetailsHeader filterRecentH" [hidden]="!headerListOpen || headerListHelpOpen">
+  <div class="container-fluid HeaderPageList">
+    <div class="headerListContent col-xs-12 zeroPadding">
+      <div class="navbar-header col-xs-12 zeroPadding">
+        <div class="imgHeaderLogo hidden-xs col-xs-3 col-sm-2 col-md-1 text-center zeroPadding pull-left">
+          <a routerLink="">
+            <img class="LogoIcon" (click)="homeLogo()" src="{{header.logo}}" height="" style="margin-top: 8px;">
+            <img class="LogoIcon smallScreen" (click)="homeLogo()" src="{{header.logo}}" style="margin-top:12px;">
+          </a>
+        </div>
+        <div class="serchListcomplete hidden-xs col-xs-6 col-md-8 paddingRight">
+          <span class="headerInput borderRadius col-xs-12 zeroPadding">
+            <!-- <img class="headerSearchIcon" src="{{header.searchLine}}" style="width:16px;"> -->
+            <i class="headerSearchIcon ion-search" style="width:16px;"></i>
+            <input type="text" name="searchCat" value="" [(ngModel)]="searchCat" (keyup)="searchCategory(1)" (keyup.enter)="searchCategory(0)"
+              id="nameCategory" class="headerSearch form-control" placeholder="{{header.whatLookingPlaceHolder}}">
+            <i class="headerSearchIcon ion-close" *ngIf="closeShow" (click)="cancelSearch()"></i>
+          </span>
+          <!-- <span class="headerInput col-xs-6 zeroPadding" id="headerInputLocationId">            
+            <img class="mapIcon veticalTop headerSearchIcon" style="width:14px;top: 22px;" src="assets/images/map.svg">
+            <input type="text" name="" value="" id="searchLocation" class="headerSearch form-control" placeholder="Enter a Location">
+            <input type="hidden" name="" value="" id="lat" class="headerSearch form-control">
+            <input type="hidden" name="" value="" id="lng" class="headerSearch form-control">
+            <input type="hidden" name="" value="" id="cityArea" class="headerSearch form-control">
+            <span class="headerSearchIcon goHeader" (click)="searchCategory();">Go!</span>
+          </span> -->
+        </div>
+
+        <div class="navBarSearchHeader visible-xs" style="margin-top: 8px;" id="navBarSearchHeaderCustomMobile">
+          <div class="col-xs-1 zeroPadding sideMenuMobile" id="sideMenuTrigger" (click)="sideMenuOpen()">
+            <span class="ion-navicon-round"></span>
+          </div>
+          <div class="col-xs-10">
+            <div class="searchBarCustomMobile">
+              <div class="form-group">
+                <div *ngIf="searchLayer" class="logoSearchIconCustomMobile">
+                  <img class="headerSearchIcon" src="{{header.searchLine}}">
+                  <img class="small" routerLink='' src="{{header.logo}}">
+                </div>
+                <input type="text" class="form-control headerSearch marginPadding" placeholder="" (keyup)="searchCategory(1)" (keyup.enter)="searchCategory(0)"
+                  [(ngModel)]="searchCat" name="search" id="search_input" (blur)="removeLayer()" (click)="searchLayerToggle()">
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-1 zeroPadding span2 sideMenuMobile" *ngIf="headerFilter" (click)="filterToggle()">
+            <span class="ion-ios-settings-strong"></span>
+          </div>
+          <div class="overlayList" (click)="sideMenuOpen()" *ngIf="sideListMenu"></div>
+          <div class="sideMenuList" *ngIf="sideListMenu">
+            <div class="imgProfileList col-xs-12 zeroPadding">
+              <div class="profileImage col-xs-12" id="accountSignup">
+                <div class="col-xs-12 zeroPadding focus" (routerLink="./settings" *ngIf="loginList">
+                  <div class="">
+                    <img class="imgProfile" src="{{profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+                  </div>
+                  <div class="profileUsername">{{userName}}</div>
+                </div>
+                <div class="col-xs-12 zeroPadding focus" (click)="loginSignUp()" *ngIf="!loginList">
+                  <img class="imgProfile" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png">
+                  <div class="sideLogin col-xs-12 zeroPadding">
+                    <strong>
+                      <span>{{header.logOrCreateAccount}}</span>
+                    </strong>
+                    <br>
+                    <span>{{header.onTitle}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="allContentList col-xs-12 zeroPadding" (click)="sideMenuOpen()">
+              <li *ngIf="!loginList" class="navbarLi listnone aboutHover cursorPointer">
+                <ul class="dropdownMenu listnone aboutList col-xs-12">
+                  <div class="aboutPage col-xs-12">
+                    <!-- <li>
+                      <a class="contentAbout" routerLink="./login">
+                        <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/about.png">Login</a>
+                    </li> -->
+                    <li>
+                      <a class="contentAbout" routerLink="./about">
+                        <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/about.png">{{header.aboutUs}}</a>
+                    </li>
+                    <li>
+                      <a class="contentAbout" routerLink="./trust">
+                        <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/trust.png">{{header.trustNSafe}}</a>
+                    </li>
+                    <li>
+                      <a class="contentAbout" routerLink="./howitworks">
+                        <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/work.png">{{header.howWorks}}</a>
+                    </li>
+                    <li>
+                      <a class="contentAbout" routerLink="./help">
+                        <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/help.png">{{header.needHelp}}</a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+              <li class="profileList listnone navbarLi" *ngIf="loginList">
+                <ul class="dropdownMenu listnone profileListDetails col-xs-12">
+                  <div class="profilePage col-xs-12 zeroPadding">
+                    <!-- <li class="profileLi">
+                      <a class="contentAbout textDecoration" routerLink="./settings">
+                        <i class="ion-ios-gear iconMenu"></i> My Profile</a>
+                    </li> -->
+                    <li class="profileLi">
+                      <a class="contentAbout textDecoration" routerLink="./help">
+                        <i class="ion-help-circled iconMenu"></i> {{header.needHelp}}</a>
+                    </li>
+                    <li class="profileLi">
+                      <a class="contentAbout textDecoration" routerLink="./trust">
+                        <img class="desktopIcon iconMenu" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/trust.png"> {{header.trustNSafe}}</a>
+                    </li>
+                    <li class="profileLi">
+                      <a class="contentAbout textDecoration cursorPointer" (click)="logOut()">
+                        <i class="ion-power iconMenu"></i> {{header.logOut}}</a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+            </div>
+          </div>
+          <!--sideMenuMobile Modal -->
+
+        </div>
+
+
+        <div class="navbarCollapse col-xs-4 col-md-3 hidden-xs zeroPadding pull-right" id="myNavbar">
+          <ul class="nav navbar-nav col-xs-12 zeroPadding text-center">
+            <li class="navbarLi" *ngIf="!loginList" style="">
+              <!-- <a routerLink="login" class="headerList">{{header.login}}</a> -->
+              <a class="headerList" (click)="loginSignUp()">{{header.login}}</a>
+            </li>
+            <li class="navbarLi" (click)="sellPopup()">
+              <a class="headerList borderListSell"> {{header.sellStuff}}
+                <img src="assets/images/photo-camera.svg" style="width:17px;position: relative;bottom:3px;left: 4px;">
+              </a>
+            </li>
+            <li class="navbarLi">
+              <!-- <select class="headerList form-control" #langSelect (change)="translate.use(langSelect.value)">
+                  <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                </select> -->
+            <select #lang class="headerList form-control" (change)="selectedLanguage(lang.value)">
+              <option>{{header.language}}</option>
+              <option *ngFor="let language of header.languageOptions" value="{{language.value}}">
+                {{language.lang}}
+              </option>
+            </select>
+            <!-- <label class="headerList">{{header.selectLang}}</label> -->
+          </li>
+            <li *ngIf="!loginList" class="navbarLi aboutHover cursorPointer">
+              <a class="padingList">
+                <img src="assets/images/aboutLine.svg" style="width:23px">
+              </a>
+              <ul class="dropdown-menu aboutList">
+                <div class="aboutPage col-xs-12">
+                  <li>
+                    <a class="contentAbout" routerLink="./about">
+                      <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/about.png">{{header.aboutUs}}</a>
+                  </li>
+                  <li>
+                    <a class="contentAbout" routerLink="./trust">
+                      <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/trust.png">{{header.trustNSafe}}</a>
+                  </li>
+                  <li>
+                    <a class="contentAbout" routerLink="./howitworks">
+                      <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/work.png">{{header.howWorks}}</a>
+                  </li>
+                  <li>
+                    <a class="contentAbout" routerLink="./help">
+                      <img class="desktopIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/help.png">{{header.needHelp}}</a>
+                  </li>
+                </div>
+              </ul>
+            </li>
+            <li class="profileList navbarLi" *ngIf="loginList" style="margin-top: 7px;">
+              <a class="headerList">
+                <span class="">
+                  <img class="imgProfile" src="{{profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+                </span>
+                <span class="profileUsername">{{userName}}</span>
+                <i class="ion-ios-arrow-down"></i>
+              </a>
+              <ul class="dropdown-menu profileListDetails">
+                <div class="profilePage col-xs-12 zeroPadding">
+                  <!--<li class="profileLi" (click)="onFacebookLoginClick()"><a class="contentAbout textDecoration"><i class="ion-ios-people iconMenu"></i> Invite Friends</a></li>
+                  <li class="seperator"></li>-->
+                  <!-- <li class="profileLi"><a class="contentAbout textDecoration" routerLink="./items"><i class="ion-pricetag iconMenu"></i> My Offers</a></li> -->
+                  <li class="profileLi">
+                    <a class="contentAbout textDecoration" routerLink="./settings">
+                      <i class="ion-ios-gear iconMenu"></i> {{header.myProfile}}</a>
+                  </li>
+                  <li class="profileLi">
+                    <a class="contentAbout textDecoration" routerLink="./help">
+                      <i class="ion-help-circled iconMenu"></i>{{header.needHelp}}</a>
+                  </li>
+                  <li class="profileLi">
+                    <a class="contentAbout textDecoration" routerLink="./trust">
+                      <img class="desktopIcon iconMenu" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/trust.png"> {{header.trustNSafe}}</a>
+                  </li>
+                  <li class="profileLi">
+                    <a class="contentAbout textDecoration cursorPointer" (click)="logOut()">
+                      <i class="ion-power iconMenu"></i> {{header.logOut}}</a>
+                  </li>
+                </div>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- sell in stuff -->
+<div class="modal fade" id="sellModals" data-backdrop="static" data-keyboard="false" role="dialog" style="background-color: rgba(238, 238, 238, 0.95);">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body" style="display:inline-block;">
+        <div class="closeIcon" data-dismiss="modal">X</div>
+        <div class="collectionImg col-xs-12">
+          <h3 class="col-xs-12 titleH3 text-center">Post Product</h3>
+          <h4 class="col-xs-12 zeroPadding">Add photos of your product</h4>
+          <div class="col-xs-12 editImagesell zeroPadding cursorPointer">
+            <span class="listImg" *ngIf="imgUrl && imgUrl.length > 0">
+              <span class="imagsProduct" *ngFor="let img of imgUrl">
+                <img class="sellImg sellImgs" src="{{img.img}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+                <span class="imgCancel ion-close-circled" (click)="removeImg(i)"></span>
+              </span>
+            </span>
+            <span class="emptyImg" *ngIf="imgUrl && imgUrl.length < 5">
+              <!-- <img class="sellImg" src="" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"> -->
+              <input type="file" id="uploadSellInput" name="image" accept="image/*" class="yeloProfileImage" (change)="fileUploader()"
+                ng2FileSelect [uploader]="uploader" multiple>
+            </span>
+          </div>
+          <div class="col-xs-12 zeroPadding">
+            <h5 style="color: #FF4081;" *ngIf="imgUrl.length == 0"> At least one photo is mandatory</h5>
+            <h5 style="color: #FF4081;" *ngIf="imgUrl.length > 0"> Add upto {{5 - imgUrl.length }} more photo(optional)</h5>
+            <h5 style="color: #FF4081;" *ngIf="imgUrl.length == 5"> Product Image Maximum five...</h5>
+          </div>
+          <!-- <h5 class="col-xs-12 zeroPadding">Add upto 5 images (optional)</h5> -->
+        </div>
+        <hr class="col-xs-12 zeroPadding">
+        <div class="formLists col-xs-12 zeroPadding">
+          <div class="sellingList col-xs-12 col-sm-6">
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">What you are selling? </label>
+              <input type="text" name="productName" [(ngModel)]="productName" class="form-control inputBox" placeholder="Add Title">
+              <textarea name="productDescription" [(ngModel)]="productDescription" class="form-control inputBox" rows="4" cols="4" placeholder="Description"
+                style="resize:none;height:auto"></textarea>
+            </div>
+            <div class="formList col-xs-12 zeroPadding" *ngIf="catList">
+              <label class="labels col-xs-12 zeroPadding">Tell us a little more about the item you're Selling</label>
+              <select name="" #sCa (change)="selectCat(sCa.value);" id="selCat" class="form-control inputBox">
+                <option value="" disabled selected>Select Product Category</option>
+                <option value="{{list.name}}" *ngFor="let list of  catList">{{list.name}}</option>
+              </select>
+              <!-- <select name="" class="form-control inputBox">
+                <option value="">test</option>
+              </select> -->
+            </div>
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Where is the product located? </label>
+              <input type="text" name="" class="form-control inputBox" id="sellLocate" (keyup)="changeLocation()" placeholder="Where you sell the item">
+              <input type="hidden" name="" value="" id="latS" class="headerSearch form-control">
+              <input type="hidden" name="" value="" id="lngS" class="headerSearch form-control">
+              <input type="hidden" name="" value="" id="cityS" class="headerSearch listNew form-control">
+              <input type="hidden" name="" value="" id="state" class="headerSearch listNew form-control">
+              <input type="hidden" name="" value="" id="locate" class="headerSearch listNew form-control">
+            </div>
+          </div>
+          <div class="priceLists col-xs-12 col-sm-6">
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Price </label>
+              <div class="col-xs-8 col-sm-10 zeroPadding">
+                <input type="text" name="productPrice" [(ngModel)]="productPrice" class="form-control inputBox" placeholder="Product Price">
+              </div>
+              <div class="col-xs-4 col-sm-2 zeroPadding">
+                <select name="currency" [(ngModel)]="currency" #sC (change)="selectCurrency(sC.value);" class="form-control inputBox zeroPadding">
+                  <option *ngFor="let item of currencyList" value="{{item.value}}">{{item.value}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Product Condition</label>
+              <select name="condition" #cC (change)="selectCondition(cC.value);" id="selProd" class="form-control inputBox">
+                <option value="" disabled selected>Select Product Condition</option>
+                <option value="Other(see description)">Other(see description)</option>
+                <option value="For Parts">For Parts</option>
+                <option value="Used(normal wear)">Used(normal wear)</option>
+                <option value="Open Box(never used)">Open Box(never used)</option>
+                <option value="Reconditioned/Certified">Reconditioned/Certified</option>
+                <option value="New(Never Used)">New(Never Used)</option>
+              </select>
+            </div>
+            <div class="formList col-xs-12 zeroPadding">
+              <!-- <label class="labels col-xs-12 zeroPadding">Share your stuff ?</label> -->
+              <div class="toggleSwitch col-xs-12 zeroPadding">
+                <span class="titleSwitch" style="color: #000000ba;font-weight:bold;">
+                  Negotiable
+                </span>
+                <span class="changeSitch pull-right">
+                  <label class="switch">
+                    <input type="checkbox" [checked]="toggleSlide" #st (change)="switchToggle(st.checked);">
+                    <span class="slider round"></span>
+                  </label>
+                </span>
+              </div>
+            </div>
+            <!-- <div class="formList col-xs-12 zeroPadding">
+              <label class="labels col-xs-12 zeroPadding">Share your stuff ?</label>
+              <div class="toggleSwitch col-xs-12 zeroPadding">
+                <span class="titleSwitch">
+                  Facebook
+                </span>
+                <span class="changeSitch pull-right">
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </span>
+              </div>
+              <div class="toggleSwitch col-xs-12 zeroPadding">
+                <span class="titleSwitch">
+                  Instagram
+                </span>
+                <span class="changeSitch pull-right">
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </span>
+              </div>
+              <div class="toggleSwitch col-xs-12 zeroPadding">
+                <span class="titleSwitch">
+                  Twitter
+                </span>
+                <span class="changeSitch pull-right">
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </span>
+              </div>
+            </div> -->
+          </div>
+          <div class="col-xs-12 buttonPost">
+            <h5 class="col-xs-12 text-center" style="color: #FF4081;" *ngIf="errMsg"> {{errMsg}}</h5>
+            <div class="loader loginPage loaderGif" *ngIf="loaderButton" style="top: 6px !important;left: 55px;"></div>
+            <button type="button" class="btn btnPost" (click)="uploadProduct()">Post</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--loginModal-->
+<!-- Modal -->
+<div class="modal fade" id="loginModal" data-backdrop="static" data-keyboard="false" role="dialog" style="background-color: rgba(238, 238, 238, 0.95);">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close cancelButton" data-dismiss="modal">&times;</button>
+        <div class="col-sm-6 paddingZero loginModalLeft" style="background: url(../assets/images/formBackground.png);
+        background-position: 80% 1%;
+        background-repeat: no-repeat;">
+          <!--visibility hidden-->
+          <div class="loginModalLeftCont">
+            <h5 class="help" routerlink="/help" data-dismiss="modal">Help</h5>
+            <div class="loginModalLogo">
+              <img class="" src="assets/images/logo.svg" alt="logo">
+              <p class="buySell">{{header.timeToTitle}}</p>
+            </div>
+            <div class="quickConnectCont">
+              <h3 class="quickConnectH3">
+                <span class="quickConnectSpanOne">
+                  <span class="quickConnectSpanTwo">QUICKLY CONNECT WITH</span>
+                </span>
+              </h3>
+            </div>
+            <div class="socialLoginButton">
+              <div class="socialButton loginFb form-group" type="button">
+                Continue with Facebook
+                <i class="socialIon ion-social-facebook"></i>
+              </div>
+            </div>
+            <div class="socialLoginButton">
+              <div class="socialButton loginGoogle form-group" type="button">
+                Continue with Google
+                <i class="socialIon ion-social-facebook"></i>
+              </div>
+            </div>
+            <div class="quickConnectCont">
+              <h3 class="quickConnectH3">
+                <span class="quickConnectSpanOne">
+                  <span class="quickConnectSpanTwo">OR USE YOUR EMAIL</span>
+                </span>
+              </h3>
+            </div>
+            <div class="signUpLogInCont">
+              <div class="col-xs-6 signUpLogInContLeft">
+                <button class="" type="button">Sign Up</button>
+              </div>
+              <div class="col-xs-6 signUpLogInContRight">
+                <button class="" type="button">Log In</button>
+              </div>
+            </div>
+            <div class="termsAndConditions">
+              <p>By clicking on "Sign up", you agree to the Yelo
+                <strong>Terms & Conditions</strong> and
+                <strong> Privacy Policy</strong>
+              </p>
+            </div>
+          </div>
+          <!--visibility hidden-->
+        </div>
+
+        <div class="col-sm-6 loginModalright">
+          <!--firstView-->
+          <div class="firstView fbSocial" *ngIf="!SocialToggle">
+            <h5 class="help" routerLink="./help" data-dismiss="modal">Help</h5>
+            <div class="loginModalLogo">
+              <img class="" src="assets/images/logo.svg" alt="logo">
+              <p class="buySell">{{header.timeToTitle}}</p>
+            </div>
+            <div class="quickConnectCont">
+              <h3 class="quickConnectH3">
+                <span class="quickConnectSpanOne">
+                  <span class="quickConnectSpanTwo">QUICKLY CONNECT WITH</span>
+                </span>
+              </h3>
+            </div>
+            <div class="socialLoginButton">
+              <div class="socialButton loginFb form-group" (click)="signInWithFB()">
+                <div class="loaderGif loadSocial" style="top: 5px;display:none;"></div>
+                Continue with Facebook
+                <i class="socialIon ion-social-facebook"></i>
+              </div>
+            </div>
+            <div class="socialLoginButton">
+              <div class="socialButton loginGoogle form-group" (click)="signInWithGoogle()">
+                <div class="loaderGif loadgoogleSocial" style="top: 5px;display:none;"></div>
+                Continue with Google
+                <i class="socialIon ion-social-google"></i>
+              </div>
+            </div>
+            <div class="quickConnectCont">
+              <h3 class="quickConnectH3">
+                <span class="quickConnectSpanOne">
+                  <span class="quickConnectSpanTwo">OR USE YOUR EMAIL</span>
+                </span>
+              </h3>
+            </div>
+            <div class="signUpLogInCont">
+              <div class="col-xs-6 signUpLogInContLeft">
+                <button class="signupClick" type="button" (click)="signUpToggle()">Sign Up</button>
+              </div>
+              <div class="col-xs-6 signUpLogInContRight">
+                <button class="" type="button" (click)="loginToggle()">Log In</button>
+              </div>
+            </div>
+            <div class="termsAndConditions">
+              <p>By clicking on "Sign up", you agree to the {{header.titleTag}}
+                <strong class="cursorPointer" data-dismiss="modal" routerLink="./terms">Terms & Conditions</strong> and
+                <strong class="cursorPointer" data-dismiss="modal" routerLink="./privacy"> Privacy Policy</strong>
+              </p>
+            </div>
+          </div>
+          <!--firstView-->
+          <!--loginView-->
+          <div class="loginView" [hidden]="!login_Toggle">
+            <div class="backHelp">
+              <span class="back" (click)="socialLink()">
+                <span class="lnr lnr-arrow-left"></span>Log In</span>
+              <span class="helpLoginView" routerLink="./help" data-dismiss="modal">Help</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="box">
+              <form>
+                <div class="form-group inputBox">
+                  <!-- <input class="form-control" type="text" name="username" [(ngModel)]="username"> -->
+                  <input class="form-control" type="text" name="username" [(ngModel)]="username" required="">
+                  <label>Username</label>
+                </div>
+                <div class="form-group inputBox">
+                  <input class="form-control" type="password" name="password" [(ngModel)]="password" required="">
+                  <label>Password</label>
+                </div>
+                <!-- <div class="checkbox">
+                  <label><input type="checkbox" name="remember"> Remember me</label>
+                </div> -->
+                <div class="loginButton">
+                  <div class="loader loginPage loaderGif" *ngIf="loaderButton" style="top: 6px !important;left:46%"></div>
+                  <button type="submit" class="btn btn-default" (click)="login()">Log in</button>
+                </div>
+                <div class="errorMsg col-md-12 col-xs-12 text-center" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+              </form>
+            </div>
+            <div class="forgetOrNoAccount">
+              <p class="noAccount" (click)="resetToggle()">Forgot your password?</p>
+              <p class="noAccount" (click)="signUpToggle()">Don't have an account?</p>
+            </div>
+          </div>
+          <!--loginView-->
+
+          <!--forgot password-->
+          <div class="loginView" [hidden]="!forgot_Toggle">
+            <div class="backHelp">
+              <span class="back" (click)="loginToggle()">
+                <span class="lnr lnr-arrow-left"></span>Log In</span>
+              <span class="helpLoginView" routerLink="./help" data-dismiss="modal">Help</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="box">
+              <form>
+                <div class="form-group inputBox">
+                  <input class="form-control" type="text" name="email" onpaste="return false;" required="" [(ngModel)]="email" #ers (keyup)="emailValidation(ers.value)"
+                    id="emailForgot" (change)="emailValidationCheck(ers.value)">
+                  <label>Email</label>
+                  <div class="errorMsg text-center" *ngIf="registerEmailErrMsg">{{registerEmailErrMsg}}</div>
+                </div>
+                <div class="loginButton">
+                  <div class="loader loginPage loaderGif" *ngIf="loaderButton" style="top: 6px !important;left:46%"></div>
+                  <button type="submit" class="btn btn-default" (click)="resetPassword()">Submit</button>
+                </div>
+                <div class="errorMsg col-md-12 col-xs-12 text-center" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+              </form>
+            </div>
+          </div>
+          <!--forgot password-->
+
+          <!-- Otp -->
+          <div class="loginView" [hidden]="!otp_Toggle">
+            <div class="backHelp">
+              <span class="back" (click)="loginToggle()">
+                <span class="lnr lnr-arrow-left"></span>Log In</span>
+              <span class="helpLoginView" routerLink="./help" data-dismiss="modal">Help</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="box">
+              <form>
+                <!-- <div class="form-group inputBox">
+                  <input class="form-control" type="text" name="otpNumber" required="" [(ngModel)]="otpNumber" id="otpnumber">
+                  <label>OTP</label>
+                </div> -->
+                <div class="form-group inputBox">
+                  <div class=" col-md-12 col-xs-12 text-center" ><b>Enter the verification code</b></div>
+                  <div class=" col-md-12 col-xs-12 text-center" style="font-size:14px">Enter the code that we sent to {{PhoneNum}} </div>
+                  <!-- <label class="col-md-12">OTP</label> -->
+                  <input class="form-control" type="text" name="otpNumber" required="" [(ngModel)]="otpNumber" placeholder="OTP" id="otpnumber">
+                </div>
+                <div class="loginButton">
+                  <div class="loader loginPage loaderGif" *ngIf="loaderButton" style="top: 6px !important;left:46%"></div>
+                  <button type="submit" class="btn btn-default" [disabled]="!otpNumber" (click)="otpVerify()">Submit</button>
+                </div>
+                <div class="errorMsg col-md-12 col-xs-12 text-center" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+              </form>
+            </div>
+          </div>
+          <!-- Otp -->
+
+
+          <!--signUpView-->
+          <div class="loginView signupFb" [hidden]="!signUp_toggle">
+            <div class="backHelp">
+              <span class="back" (click)="socialLink()">
+                <span class="lnr lnr-arrow-left"></span>Create a new account
+              </span>
+              <span class="helpLoginView" routerLink="./help" data-dismiss="modal">Help</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="box">
+              <form>
+                <div class="form-group inputBox">
+                  <input class="form-control" type="text" name="fullName" required="" [(ngModel)]="fullName" id="fullname">
+                  <label>Name</label>
+                  <div class="errorMsg text-center" *ngIf="registerfullErrMsg">fullname is missing</div>
+                </div>
+                <div class="form-group inputBox">
+                  <input class="form-control input-data" name="username" required="" type="text" #uc [(ngModel)]="username" (change)="usernameCheck(uc.value)"
+                    id="username">
+                  <label>Username</label>
+                  <div class="errorMsg text-center" *ngIf="registerUserErrMsg">{{registerUserErrMsg}}</div>
+                </div>
+
+                <div class="form-group inputBox">
+                  <input class="form-control" type="text" name="email" required="" [(ngModel)]="email" #evs (keyup)="emailValidation(evs.value)"
+                    id="email" (change)="emailValidationCheck(evs.value)">
+                  <label>Email</label>
+                  <div class="errorMsg text-center" *ngIf="registerEmailErrMsg">{{registerEmailErrMsg}}</div>
+                </div>
+
+                <div class="form-group inputBox">
+                  <input class="form-control" type="text" name="phonenumber" [(ngModel)]="phonenumber" #pv (keyup)="mobileValidation(pv.value)"
+                    id="phone" (change)="phonenumberCheck(pv.value)" required="" style="padding-left:90px;" placeholder="Phone Number">
+                  <!-- <label>PHONE NUMBER</label> -->
+                  <div class="errorMsg text-center" *ngIf="registerPhoneErrMsg">{{registerPhoneErrMsg}}</div>
+                </div>
+
+                <div class="form-group inputBox">
+                  <input class="form-control" name="password" required="" id="signPwd" type="password" [(ngModel)]="password">
+                  <label>Password</label>
+                </div>
+                <div class="loginButton">
+                  <input type="hidden" id="googleId">
+                  <input type="hidden" id="googleToken">
+                  <div class="loader loginPage loaderGif" *ngIf="loaderButton" style="top: 6px !important;left:46%"></div>
+                  <button type="submit" class="btn btn-default ls signupRegister" (click)="deviceId()">Sign up</button>
+                  <button type="submit" class="btn btn-default ls signUpFb" style="display:none;" (click)="deviceId()">Sign up</button>
+                  <button type="submit" class="btn btn-default signUpgoogle" style="display:none;" (click)="deviceId()">Sign up</button>
+                </div>
+                <div class="errorMsg col-xs-12 text-center" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+              </form>
+            </div>
+            <div class="forgetOrNoAccount">
+              <!-- <p class="forgetPassword">Forgot your password?</p> -->
+              <p class="noAccount" (click)="loginToggle()">Already have an account?</p>
+            </div>
+          </div>
+          <!--signUpView-->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!--loginModal-->
+
+<nav class="navbar registerLoginHeader" [hidden]="headerListOpen || headerListHelpOpen">
+  <div class="container">
+    <div class="imgIcon pull-left">
+      <span>
+        <a routerLink="">
+          <img class="LogoIcon" routerLink='' src="{{header.logoPng}}">
+          <img class="LogoIcon smallScreen marginPadding" routerLink='' src="{{header.logo}}">
+        </a>
+      </span>
+    </div>
+    <div class="mainMenuList signUpLoginHide pull-right" style="margin-top: 5px;">
+      <span class="">
+        <a routerLink="" class="details textDecoration">{{header.Home}}</a>
+      </span>
+      <span class="" *ngIf="!loginList">
+        <a routerLink='register' class="details textDecoration">{{header.signUp}}</a>
+      </span>
+      <span class="" *ngIf="!loginList">
+        <a routerLink='login' class="details textDecoration">{{header.login}}</a>
+      </span>
+      <span class="" *ngIf="loginList">
+        <a (click)="logOut()" class="details textDecoration">{{header.logOut}}</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar registerLoginHeader" [hidden]="!headerListHelpOpen" style="height: 60px; padding: 10px 0px 0px 0px;">
+  <div class="yeloListOffer col-xs-12">
+    <div class="imgIcon pull-left" style="margin-left: 5%;">
+      <span>
+        <a routerLink="">
+          <img class="LogoIcon" routerLink='' src="{{header.logoPng}}">
+          <img class="LogoIcon smallScreen marginPadding" routerLink='' src="{{header.logo}}" style="margin-top: -5px;">
+        </a>
+      </span>
+    </div>
+    <div class="mainMenuList pull-right hidden-xs" style="margin-right: 5%;margin-top: 8px;">
+      <span class="">
+        <a routerLink="" class="details textDecoration" style="color:#ffffff">{{header.backToTitle}}</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+
+<!-- sell popup -->
+<div class="modal fade" id="sellModal" role="dialog">
+  <div class="modal-dialog" style="margin-top:12%;">
+
+    <!-- Modal content-->
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-body sellPopup col-xs-12 padMore">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="col-xs-7 contentSell paddingLeft" style="padding-top: 12%;">
+          <div class="col-xs-12 zeroPadding form-group" style="font-size: 22px;line-height: 1;">Your message has been sent to the Seller!</div>
+          <div class="sizeSmall col-xs-12 zeroPadding form-group">Download our app on the App Store or Google Play to see your messages, and Chat with hundreds of potential buyers
+            and sellers!</div>
+          <div class="col-xs-12 zeroPadding">
+            <div class="col-xs-5 socialImg paddingLeft">
+              <img src="assets/images/playstore.svg" class="col-xs-12 zeroPadding">
+            </div>
+            <div class="col-xs-5 socialImg paddingLeft">
+              <img src="assets/images/appstore.svg" class="col-xs-12 zeroPadding">
+            </div>
+          </div>
+          <!-- <div class="sellRadioList col-xs-12 zeroPadding form-group">
+            <span class="col-xs-6 zeroPadding">
+              <input type="radio" name="sellRadio" class="radioSell radio-inline marginPadding" (click)="radioSelect(1)" value="" checked> {{header.phoneNumber}}</span>
+            <span class="col-xs-6 zeroPadding">
+              <input type="radio" name="sellRadio" class="radioSell radio-inline marginPadding" (click)="radioSelect(2)" value=""> {{header.emailAddress}}</span>
+          </div> -->
+          <!-- <h5 class="errorMsg" *ngIf="email_Error">{{email_Error}}</h5>
+          <h5 class="errorMsg" *ngIf="phone_Error">{{header.enterNumberCountryCode}} </h5>
+          <div class="sellEmailPhone col-xs-12 zeroPadding form-group" [hidden]="radioSelectList">           
+            <input type="text" name="phoneNumber" [(ngModel)]="phoneNumber" #pcv (keyup)="mobileValidation(pcv.value)" id="phoneSell"
+              (change)="mobileValidation(pcv.value)" class="form-control sellInput" placeholder="Phone Number">
+            <button class="sellSend col-xs-12" [disabled]="!(registerSave && phoneNumber)" (click)="sellSend(2)">{{header.send}}</button>
+          </div> -->
+          <!-- <div class="sellEmailPhone col-xs-12 zeroPadding form-group" [hidden]="!radioSelectList">
+            <i class="sellIcon ion-ios-email"></i>
+            <input type="text" name="email" [(ngModel)]="email" #ev (keyup)="emailValidation(ev.value)" (change)="emailValidation(ev.value)"
+              class="form-control sellInput" placeholder="Email Address">
+            <button class="sellSend col-xs-12" [disabled]="!(registerSave && email)" (click)="sellSend(1)">{{header.send}}</button>
+          </div>
+          <div class="sizeSmall cursorPointer textDecorationLine" data-dismiss="modal" routerLink="">{{header.continueWebsite}}</div> -->
+        </div>
+        <div class="col-xs-5 sellMobileImg paddingLeft">
+          <img src="assets/images/apps-on-android-ios.png" width="240" height="294">
+        </div>
+        <div class="col-xs-12 sellMobileImg text-center" *ngIf="succesSeller">
+          <br>
+          <br>
+          <br>
+          <h1 class="sizeLarge">{{header.thankYou}}</h1>
+          <h1 class="sizeMedium">{{header.takeFewMinutes}}</h1>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- server error -->
+
+<div class="modal fade" id="serverError" data-keyboard="false" data-backdrop="static" role="dialog">
+  <div class="modal-dialog" style="margin-top:12%;">
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-body text-center sellPopup col-xs-12 padMore">
+        <div class="col-xs-12 contentSell padMoree">
+          <div class="sizeLarge col-xs-12 zeroPadding">{{header.checkInternetConnection}}</div>
+        </div>
+        <button type="button" class="btn btn-success" (click)="serverError()">{{header.ok}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- user rejected -->
+<div class="modal fade" id="userRejected" data-keyboard="false" data-backdrop="static" role="dialog">
+  <div class="modal-dialog" style="margin-top:12%;">
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-body text-center sellPopup col-xs-12 padMore">
+        <button type="button" class="close" data-dismiss="modal" (click)="logOutReject()">&times;</button>
+        <div class="col-xs-12 contentSell padMoree">
+          <div class="sizeLarge col-xs-12 zeroPadding">{{header.sessionTimedOut}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="google-signin-client_id" content="527165199246-1hj4creseke8pko22uvhv2her0ir8037.apps.googleusercontent.com"> -->
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/js/intlTelInput.css">
+  <link rel="stylesheet" type="text/css" href="assets/js/bootstrap.min.css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Helvetica Neue+Web:300,400,600,700" rel="stylesheet"> -->
+  <meta name="google-site-verification" content="6vUqmveojGPk3jz6mcu67yFF8tlyV5Qm6nnk9N6B3ac" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8037091146947232",
+      enable_page_level_ads: true
+    });
+  </script> -->
+
+</head>
+
+<body>
+  <app-root>
+    <!-- <div class="loaderBackground">
+      <div class="loader"></div>
+    </div> -->
+  </app-root>
+  <script type="text/javascript" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/js/jquery.min.js"></script>
+  <script type="text/javascript" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/js/bootstrap.min.js"></script>
+  <script type="text/javascript" type="text/javascript" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/js/moment.min.js"></script>
+  <script type="text/javascript" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/js/sdk.js"></script>
+  <!-- <script type="text/javascript" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/js/platform.js"></script> -->
+  <script type="text/javascript" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/js/intlTelInput.min.js"></script>
+  <!-- <script type="text/javascript" src="http://www.google.com/jsapi?key=abcdef"></script> -->
+  <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBN3YbNCmmk0k1uoYrNMZ4z-xlPpSrGzXA&libraries=places,geometry"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <!-- <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
+  <script type="text/javascript"> 
+    var keyscount = 0 ;
+    var ApiKeys =[
+                    'AIzaSyBJ2LWIMnZNdsoYmUREgbN_4VEksPnoW8w0',
+                    'AIzaSyARCOttlU7-BxYKjHojE6ExyYL3KnvboN0',
+                    'AIzaSyCsk80Hym23CbAI5AWOcG-xx_K8slrtX7c',];
+    //                 window.onerror = function() {
+    //           ++keyscount;
+    //           alert('Google maps failed to load!'+keyscount);
+          
+    // }
+    window.gm_authFailure = () => {
+              ++keyscount;
+              loadMap();
+              alert('Google maps failed to load!'+keyscount);
+          
+    }
+    // window.gm_authFailure = function() {
+    //         //  if(ApiKeys.length <= keyscount){
+    //          ++keyscount;
+    //         //  for(var inst = keyscount ; inst < ApiKeys.length; inst ){
+    //         //    window.onload  = loadMap();
+    //         //  }
+    //           alert('Google maps failed to load!'+keyscount);
+    //         //  }
+    // }
+  function loadMap(){
+    if (!GValidateKey("51c0f86eb5b5819b28fcd86a3f1fa26513b12f14")) {
+  G_INCOMPAT = true;
+  alert("The Google Maps API key used on this web site was registe for a different web site. You can generate a new key for the web site at http://code.google.com/apis/maps/.");
+  return;
+ }
+    alert('Google maps failed to load------------------!'+keyscount);
+  google.load("maps", "3", {other_params:'key='+ApiKeys[keyscount], callback: function(err, data){
+    console.log('------------___>', err, data)
+      var options = {
+               center: {
+                   lat: -34.397,
+                   lng: 150.644
+               },
+                 zoom: 5,
+                 disableDefaultUI: true,
+                 scrollwheel: true,
+                 draggable: false
+           },
+           element = document.getElementById('cityAreai')
+           setTimeout(function(){
+             console.log('sssss');
+            var map = new google.maps.Map(element, options,  function(err, data){});
+           },3000);
+
+           console.log(window,ApiKeys.length);
+}});
+}
+// window.onload = loadMap();
+  </script>
+
+</body>
+
+</html>

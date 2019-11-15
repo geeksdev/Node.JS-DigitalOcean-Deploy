@@ -1,0 +1,105 @@
+<title *ngIf="data">{{data.title}}</title>
+
+<div class="allDetailsList col-xs-12 zeroPadding" style="margin-top:55px;">
+  <div class="col-xs-12 text-center zeroPadding" style="background:#fff;">
+    <div class="container padMoree">
+      <span class="menuSecondary active"><a class="textDecoration" routerLink="../about">{{aboutUs.aboutUs}}</a></span>
+      <!--<span class="menuSecondary"><a class="colorGrayLight textDecoration" routerLink="../jobs">Jobs</a></span>-->
+      <span class="menuSecondary"><a class="colorGrayLight textDecoration" routerLink="../howitworks">{{aboutUs.howWorks}}</a></span>
+    </div>
+    <div class="aboutCover col-xs-12 zeroPadding text-center imgCoverAbout">
+      <h1 class="aboutTextImage">{{aboutUs.createCommunities}} <br> {{aboutUs.comeTogetherSell}}</h1>
+    </div>
+  </div>
+  <div class="allDescriptionList col-xs-12 zeroPadding">
+    <div class="container">
+      <div class="boxAlt ourStoryList col-xs-12 zeroPadding" style="margin: 30px 0px 20px;">
+        <div class="storyDeatils">
+          <h2 class="text-center ourStoryTitle">{{aboutUs.ourStory}}</h2>
+        </div>
+        <hr style="margin:0px;">
+        <div class="sizeText" [innerHTML]="about">
+          <!--<p>As new fathers, MobiVenta founders Nick Huzar and Arean van Veelen suddenly found themselves with more stuff than
+            they wanted and less stuff than they needed. They weren’t alone. Americans spend trillions of dollars each year
+            on new stuff, billions each year on storage units, and every day, they throw tons of their stuff away.
+          </p>
+          <div class="col-xs-12 rightSideColor colorGray">
+            In all that buying, storing, and tossing, Nick and Arean <br> saw opportunity.
+          </div>
+          <p>Could a new kind of local marketplace bring people together to get more value out of all that stuff? Could that
+            value exchange start with something as simple as a photo from a smartphone? Inspired to reimagine the model for
+            local, peer-to-peer commerce, Nick and Arean founded MobiVenta, a marketplace on a mission to become the simplest,
+            most trustworthy place for people to buy and sell locally.
+          </p>-->
+        </div>
+        <div class="sizeBottom col-xs-12 padMore text-center" style="display:none;">
+          <div class="col-xs-12 col-sm-6 zeroPadding form-group">
+            <span class="ourSpritImg ourImageStoy"></span>
+            <span class="ourImageStoyTitle colorGray">{{aboutUs.ceo}}</span>
+          </div>
+          <div class="col-xs-12 col-sm-6 zeroPadding form-group" style="border-left: 1px solid #ececec;">
+            <span class="ourSpritImg ourImageStory"></span>
+            <span class="ourImageStoyTitle colorGray">{{aboutUs.cto}}</span>
+          </div>
+        </div>
+      </div>      
+      <div class="boxAlt col-xs-12 padMore" style="display:none;">
+        <div class="storyDeatils">
+          <h2 class="text-center ourStoryTitle marginPadding">{{aboutUs.betterBuySell}}</h2>
+          <div class="text-center">{{aboutUs.largeMarket}}</div>
+        </div>
+        <br><br>
+        <div class="sizeBottom col-xs-12 col-sm-6 col-md-5">
+          <span class="ourSpritImg ourImageMap"></span>
+        </div>
+        <div class="sizeBottom colorGrayLight col-xs-12 col-sm-6 col-md-7 text-center">
+          <div class="boxRightList col-xs-12 col-md-6 paddingRight form-group">
+            <div class="boxBorder col-xs-12 padMore">
+              <div class="colorGray">{{aboutUs.topApp}}</div>
+              <div class="sizeSmall">{{aboutUs.shopCategory}}</div>
+            </div>
+          </div>
+          <div class="boxRightList col-xs-12 col-md-6 paddingRight form-group">
+            <div class="boxBorder col-xs-12 padMore">
+              <div class="colorGray">{{aboutUs.appYear}}</div>
+              <div class="sizeSmall">{{aboutUs.geekWire}}</div>
+            </div>
+          </div>
+          <div class="boxRightList col-xs-12 col-md-6 paddingRight form-group">
+            <div class="boxBorder col-xs-12 padMore">
+              <div class="colorGray">{{aboutUs.billion14}}</div>
+              <div class="sizeSmall">{{aboutUs.transactionYear}}</div>
+            </div>
+          </div>
+          <div class="boxRightList col-xs-12 col-md-6 paddingRight form-group">
+            <div class="boxBorder col-xs-12 padMore">
+              <div class="colorGray">{{aboutUs.million23}}</div>
+              <div class="sizeSmall">{{aboutUs.downloads}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="YeloNews col-xs-12 zeroPadding" *ngIf="newsDetails">
+        <div class="storyDeatils">
+          <h2 class="text-center ourStoryTitle">{{aboutUs.titleNews}}</h2>
+        </div>
+        <div class="aboutContentList col-xs-12 zeroPadding">
+          <div class="inner col-xs-12 col-sm-4 form-group paddingLeft" *ngFor="let news of newsDetails">
+            <div class="innerTotal boxAlt col-xs-12 padMore">
+              <a href="{{news.newsLink}}" target="_blank" class="textDecoration colorGray">
+                <div class="">“</div>
+                <div class="innerText">{{news.details}}</div>
+                <div class="sizeSmall">{{news.newsDate | date:'MMM d,y'}}</div>
+                <div class="text-right pressLogo">
+                  <span class="ourSpritImgNews">
+                    <img class="imagLogoNews" src="{{news.logoUrl}}">
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

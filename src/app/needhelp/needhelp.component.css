@@ -1,0 +1,14 @@
+@media (min-width: 1200px){
+    .needhelpList .container {
+        width: 970px !important;
+    }
+}
+
+i.ion-ios-close-empty.searchCancel {
+    position: absolute;
+    right: 15px;
+    z-index: 1;
+    font-size: 35px;
+    top: 8px;
+    cursor: pointer;
+}

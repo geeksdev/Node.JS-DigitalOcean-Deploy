@@ -1,0 +1,105 @@
+<title>{{needHelp.support}}</title>
+
+<div class="privacyTotal allInnerContent text-center marginTop col-xs-12 zeroPadding">  
+  <br>
+  <div class="container contentPage" [innerHTML]="terms" style="">
+    
+  </div>
+
+</div>
+
+<!-- <div class="needhelpList col-xs-12 zeroPadding">
+  <div class="searchWidgetHelp col-xs-12 zeroPadding">
+    <div class="widgetneed"></div>
+    <div class="pageWidthContainer">
+      <div class="container text-center">
+        <h2 class="col-xs-12 helpneedtitle">How can we help you?</h2>
+        <div class="col-xs-12 zeroPadding">
+          <input type="text" name="" #cv (keyup)="searchListCat(cv.value)" class="form-control helpInput" placeholder="Type your question here">
+          <i class="ion-ios-close-empty searchCancel" (click)="emptyText()" *ngIf="cancelButton"></i>
+          <div class="col-xs-12 zeroPadding searchHelp boxShadowList" *ngIf="pointsLength && helpSearchCat">
+            <ul class="listnone listhelp col-xs-12 zeroPadding marginPadding">
+              <li class="listHelpSearch text-left padMore cursorPointer" (click)="dropQues(dropList.ans)" *ngFor="let dropList of helpSearchCat">{{dropList.ques}}</li>
+            </ul>
+          </div>
+          <div class="col-xs-12 zeroPadding searchHelp boxShadowList" *ngIf="listQuesDrop">
+            <ul class="listnone listhelp col-xs-12 zeroPadding marginPadding">
+              <li class="listHelpSearch text-left padMore cursorPointer" [innerHTML]="listQues"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chooseCategory text-center col-xs-12 form-group" style="background-color: #ffffff;">
+    <div class="container" *ngIf="helpCat">
+      <h2>Choose a Category To Find The Help You Need</h2>
+      <br>
+      <div class="col-xs-12 zeroPadding text-center">
+        <div class="col-xs-6 col-sm-4 col-md-2 listHelp zeroPadding form-group" (click)="catSelect(cat._id)" *ngFor="let cat of helpCat; let i = index;">
+          <div class="chooseImages boxImage needimages">
+            <img src="{{cat.faqCatIcon}}" class="helpImageCat col-xs-12 zeroPadding">
+          </div>
+          <div class="categoryTitle">{{cat.faqCategory}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="frequentlyQuestion col-xs-12 zeroPadding" *ngIf="!topicContent">
+    <div class="container">
+      <h2 class="text-center colorGray">Frequently Asked Questions</h2>
+      <hr class="col-xs-12 zeroPadding" style="border-top: 1px solid #D8D8D8;">
+      <div class="col-xs-12 listfaq" *ngIf="faqPoints">
+        <div class="listDetailsneed col-xs-6 zeroPadding" id="a{{i}}" *ngFor="let faqs of faqPoints;let i = index;">
+          <div class="col-xs-12 zeroPadding" *ngFor="let faq of faqs.points">
+            <div class="faq_title" (click)="arrowList(i)"> <i class="arrows"></i> {{faq.ques}} </div>
+            <div class="listfaqTitle col-xs-12 form-group zeroPadding">
+              <div class="sizeSmall col-xs-12 anslist form-group zeroPadding" [innerHTML]="faq.ans"></div>
+              <div class="readMore col-xs-12 zeroPadding">
+                <a class="cursorPointer textDecorationLine colorGreen" (click)="catSelectid(faqs.faqCategory, faq.ans)">Read more...</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!--<div class="col-xs-6 listfaq" *ngIf="faqPoints1">
+        <div class="listDetailsneed col-xs-12 zeroPadding" id="b{{i}}" *ngFor="let faqs of faqPoints1;let i = index;">
+          <div class="col-xs-12 zeroPadding" *ngFor="let faq of faqs.points">
+            <div class="faq_title" (click)="arrowList1(i)"> <i class="arrows"></i> {{faq.ques}} </div>
+            <div class="listfaqTitle col-xs-12 form-group zeroPadding">
+              <div class="sizeSmall col-xs-12 anslist form-group zeroPadding" [innerHTML]="faq.ans"></div>
+              <div class="readMore col-xs-12 zeroPadding">
+                <a class="cursorPointer textDecorationLine colorGreen" (click)="catSelectid(faqs.faqCategory, faq.ans)">Read more...</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+    <!-- </div>
+  </div>
+  <div class="topicsStartedList col-xs-12 zeroPadding" *ngIf="topicContent">
+    <div class="container">
+      <div class="col-xs-12 col-sm-4 col-md-3 listDetailsTopics paddingLeft" *ngIf="faqCat">
+        <ul class="listnone topics zeroPadding">
+          <li class="cursorPointer colorGrayLight">Topics</li>
+          <li class="colorGreen cursorPointer textEllipse catSideName" id="content{{i}}" (click)="catSelectPoints(topic.topicId, i)"
+            *ngFor="let topic of faqCat; let i = index;">{{topic.topicName}} <span class="colorGray">({{topic.count}})</span></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-9 listContent paddingLeft" *ngIf="faqCatPoints">
+        <div class="catBreadCrumb col-xs-12 zeroPadding form-group">
+          <span class="slashList colorGreen cursorPointer" (click)="HometopicChildList()">Home</span> /
+          <span class="slashList colorGreen cursorPointer" (click)="topicChildList1()">{{titleName}}</span> /
+          <span class="slashList cursorPointer">{{topicName}}</span>
+        </div>
+        <ul class="listnone topics zeroPadding" *ngIf="!topicChild">
+          <h1 class="sizeLarge">{{topicName}}</h1>
+          <li class="colorGreen cursorPointer" (click)="topicChildList(topiclist.ans)" *ngFor="let topiclist of faqCatPoints" [innerHTML]="topiclist.ques"></li>
+        </ul>
+        <ul class="listnone topics zeroPadding boxShadowList col-xs-12 padMore" *ngIf="topicChild">
+          <li class="cursorPointer" [innerHTML]="topiclistAns"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->

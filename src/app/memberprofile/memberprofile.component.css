@@ -1,0 +1,15 @@
+@media (min-width: 1200px){
+    .allItemDetails .container {
+        width: 970px !important;
+    }
+}
+
+#mapItemPopup #map { 
+ height:400px;
+}
+
+#map_canvas, #map {              
+    height:300px;
+    width: 100%;
+    display: inline-block;
+ }

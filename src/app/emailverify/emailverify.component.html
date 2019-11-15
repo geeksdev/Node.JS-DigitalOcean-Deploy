@@ -1,0 +1,30 @@
+<title>{{emailVerify.verifyEmailTitle}}</title>
+<div class="offerListDetails col-xs-12 zeroPadding" style="background-color: hsl(0, 0%, 93%)">
+  <br>
+  <div class="container">
+    <div class="itemSellLocally col-xs-12 zeroPadding">
+      <div class="col-xs-12 offersFollowers">
+        <div class="followList col-xs-12 zeroPadding boxShadowList">
+          <div class="followHeader padMore" style="text-align:left;">
+            {{emailVerify.emailVerify}}
+          </div>
+          
+          <div class="settingListDetails col-xs-12 col-sm-8 col-sm-offset-2 padMore">
+            <div class="col-xs-12 zeroPadding form-group">              
+              <div class="col-xs-12 zeroPadding">
+                <input type="text" name="email" [(ngModel)]="email" #ev (keyup)="emailValidation(ev.value)" (change)="emailValidation(ev.value)" class="form-control inputSettings" placeholder="{{emailVerify.email}}">
+                <h5 class="errorMsg" *ngIf="email_Error">{{emailVerify.emailProvide}}</h5>
+              </div>
+            </div>            
+          </div>
+          <div class="errorMsg col-xs-12 text-center" style="color:#0d71ba" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+          <hr class="col-xs-12 zeroPadding marginPadding">
+          <div class="submitSave col-xs-12 padMore text-center">
+            <div class="loaderGif" *ngIf="loaderButton"></div>
+            <button type="button" class="btn btnSettingsSave" style="width: 150px;" (click)="emailChange()" [disabled]="!(registerSave && email)">{{emailVerify.submit}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

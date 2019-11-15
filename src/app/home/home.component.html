@@ -1,0 +1,484 @@
+<title *ngIf="data">{{data.title}}</title>
+<div class="placeHolderShimmer col-xs-12" [hidden]="allListData">
+    <div class="linear-background sliders mb-5"></div>
+    <div class="col-xs-12">
+        <!-- <div class="col-xs-12 col-sm-4 col-md-3 p-0 hidden-xs">
+            <div class="carouselList" *ngFor="let list of shimmer">
+                <div class="linear-background big mb-2 col-xs-12 col-sm-6"></div>
+                <div class="linear col-xs-12 mb-4">
+                    <div class="linear-background big mb-2 col-xs-12"></div>
+                    <div class="linear-background big mb-2 col-xs-12"></div>
+                    <div class="linear-background big mb-2 col-xs-12"></div>
+                    <div class="linear-background big mb-2 col-xs-12"></div>
+                    <div class="linear-background big mb-2 col-xs-12"></div>
+                    <div class="linear-background big mb-2 col-xs-12"></div>placeHolderShimmer
+                </div>
+            </div>
+        </div> -->
+        <div class="col-xs-12">
+            <div class="linear col-xs-6 col-sm-4 col-md-3" *ngFor="let list of shimmer">
+                <div class="linear-background big mb-2"></div>
+                <div class="linear-background small mb-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="YeloHome leftResult col-xs-12 zeroPadding" [hidden]="!allListData" style="margin-top: 3em;">
+    <!-- <div class="catgoryList col-xs-12" *ngIf="catList">
+        <div class="sideListLi textEllipse1" [class.active]="cat.activeimg == true" *ngFor="let cat of catList; let i = index;" (click)="searchCategoryName(cat.name, i)">
+            <img class="catLine" *ngIf="cat.activeimg == true" src="{{cat.activeimage}}">
+            <img class="catLine" *ngIf="cat.activeimg == false || cat.activeimg == null" src="{{cat.deactiveimage}}">
+            <span class="sortColor"> {{cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}} </span>
+            <span class="catLine mulTiCancel" *ngIf="cat.activeimg == true">X</span>
+        </div>
+    </div> -->
+    <div class="homepageCover col-xs-12 zeroPadding" *ngIf="!bannerShow">
+        <div class="centerContentList">
+            <!-- <div class="HomeText">
+                <h1 class="textLocally textShadow fontLarge">{{home.bringCommunities}}
+                    <br> {{home.buySellFun}}
+                </h1>
+            </div> -->
+            <!--<div class="howItWorks">
+                        <button type="button" data-toggle="modal" data-target="#howItWorksVideo" class="btn btnWhite spanWorks"> <i class="ion-play"></i> How it Works</button>
+                    </div>-->
+            <div class="appStoreIcon">
+                <span class="">
+                    <a href="#">
+                        <img class="stroeIcon cursorPointer" src="https://d2qb2fbt5wuzik.cloudfront.net/mobivendawebsite/images/google-play.svg"
+                            alt="">
+                    </a>
+                </span>
+                <span class="">
+                    <a target="_blank" href="#">
+                        <img class="stroeIcon cursorPointer" src="https://d2qb2fbt5wuzik.cloudfront.net/mobivendawebsite/images/app-store.svg" alt="">
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mainHomeList col-xs-12 zeroPadding" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500"
+        (scrolled)="onScroll()">
+
+        <div class="container-fluid" style="margin-top:15px;">
+            <div class="sideDetails col-xs-5 col-sm-5 col-md-4 col-lg-2 form-group paddingLeft" id="sideDetailsId">
+                <div class="browseListCat allListRecent zeroPadding">
+                    <div class="filtersHeader visible-xs">
+                        <div class="col-xs-4 cancelCont">
+                            <span class="" (click)="postedWithinList(0)">{{home.cancel}}</span>
+                        </div>
+                        <div class="col-xs-4 filtersCont">
+                            <span class="">{{home.filters}}</span>
+                        </div>
+                        <div class="col-xs-4 resetCont">
+                            <span class="" (click)="postedWithinList(10)">{{home.reset}}</span>
+                        </div>
+                    </div>
+                    <div class="subcatList col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> {{home.location}}</div>
+                        <ul class="sideList listnone zeroPadding marginPadding" [hidden]="!catList">
+                            <!-- <li class="sideListLi textEllipse" (click)="checkLocation();"> -->
+                            <li class="sideListLi textEllipse">                                
+                                <span class="ion-ios-location" style="font-size:20px;"></span>
+                                <!-- Change Location -->
+                                <span class="titles">My city : 
+                                    <span class="location"></span>
+                                </span>
+                                <!-- <input type="text" class="location" id="changeLocationId" (keyup)="changeLocation()" (change)="locationChange()" placeholder="Change Location"
+                                value="">-->
+                                <input type="hidden" name="" value="" id="lati" class="headerSearch form-control">
+                                <input type="hidden" name="" value="" id="lngi" class="headerSearch form-control">
+                                <input type="hidden" name="" value="" id="cityAreai" class="headerSearch listNew form-control">
+                            </li>
+                            <li class="sideListLi textEllipse listBrowseTitle" style="border-top: 1px solid #ececec;">
+                                <span class="titles" (click)="checkLocation()">Change Location 
+                                    <!-- <span class="location"></span> -->
+                                </span> 
+                            </li>
+                            <!-- <div class="listBrowseTitle" (click)="checkLocation()"> Change Location</div> -->
+                            <!-- <span class="listBrowseTitle" (click)="checkLocation()">Change Location</span> -->
+                        </ul>
+                        <!-- <div class="listBrowseTitle" style="border-top: 1px solid #ececec;" (click)="checkLocation()"> Change Location</div> -->
+                    </div>
+
+                    <div class="subcatList topListImg col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> Top Listings</div>
+                        <ul class="sideList listnone zeroPadding text-center marginPadding" *ngIf="allListPromoted">
+                            <span class="titles" style="padding: 80px 5px;display: inline-block;height: 180px;" *ngIf="allListPromoted && allListPromoted.length == 0">No Lists!</span>
+                            <li class="sideListLi" *ngFor="let list of allListPromoted">
+                                <a routerLink="{{list.productName.split(' ').join('-')}}/{{list.postId}}">
+                                    <img class="topImg col-xs-12 zeroPadding" [defaultImage]="defaultImage" [lazyLoad]="list.mainUrl" [offset]="offsetImg" alt="{{list.seoTitle}}"
+                                        title="{{list.seoTitle}}">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="subcatList col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> {{home.categories}}</div>
+                        <ul class="sideList listnone zeroPadding marginPadding" *ngIf="catList">
+                            <div class="col-xs-12 zeroPadding catList" [ngClass]="{'active':loadCateg}">
+                                <li class="sideListLi textEllipse1" *ngFor="let cat of catList; let i = index;" (click)="searchCategoryName(cat.name, i)">
+                                    <img class="catLine" *ngIf="cat.activeimg == true" src="{{cat.activeimage}}">
+                                    <img class="catLine" *ngIf="cat.activeimg == false || cat.activeimg == null" src="{{cat.deactiveimage}}">
+                                    <input type="checkbox" class="radioClass" name="category">
+                                    <span class="sortColor"> {{cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}} </span>
+                                    <i class="ion-checkmark-round tickMark color"></i>
+                                </li>
+                            </div>
+                            <li class="sideListLi text-center col-xs-12" *ngIf="catList && catList.length >= 10">
+                                <span class="color" *ngIf="!loadCateg" (click)="loadCat()"> {{home.showMore}} </span>
+                                <span class="color" *ngIf="loadCateg" (click)="loadCat()"> {{home.showLess}} </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="subcatList col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> {{home.distance}}</div>
+                        <ul class="sideList listnone distanceList zeroPadding marginPadding" *ngIf="catList">
+                            <li class="sideListLi textEllipsee">
+                                <span class="lnr lnr-home pull-left"></span>
+                                <span id="slidecontainer">
+                                    <input type="range" min="0" step="10" max="50" value="0" class="slider_range" id="myRange" #inF (change)="milesDistance(inF.value)">
+                                    <div class="distanceCalculatorList colorGray col-xs-12 zeroPadding" style="font-size: 11px;">
+                                        <span class="col-xs-2" style="padding:0 0 0 10px;color: #e3e3e3;">|</span>
+                                        <span class="col-xs-2 zeroPadding text-center">10</span>
+                                        <span class="col-xs-2 zeroPadding text-center">20</span>
+                                        <span class="col-xs-2 zeroPadding text-center">30</span>
+                                        <span class="col-xs-2 zeroPadding text-center">40</span>
+                                        <span class="col-xs-2 zeroPadding text-right">+50</span>
+                                    </div>
+                                </span>
+                                <span class="lnrr lnr-bicyclee pull-right" style="width: 15%;">
+                                    {{home.max}}
+                                    <br>
+                                    <span class="kmDistance">{{home.km}}</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="sideList listnone padMore marginPadding" *ngIf="!catList">
+                        <li class="sideListLi">
+                            <a class="textDecoration colorGrayLight">{{home.noCategory}}</a>
+                        </li>
+                        <!-- <li class="sideListLi">
+                            <a class="textDecoration colorGrayLight" routerLink="./search">
+                                <img class="catLine" src="assets/images/othersLine.png">Others</a>
+                        </li> -->
+                    </ul>
+                    <div class="subcatList col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> {{home.sortBy}}</div>
+                        <ul class="sideList listnone zeroPadding marginPadding" *ngIf="catList">
+                            <li class="sideListLi textEllipse1" (click)="sortPrice('postedOnDesc', 0)">
+                                <input type="checkbox" id="postedOnDesc" class="radioClass SortChecked" name="sortPrice">
+                                <span class="sortColor"> {{home.newestFirst}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                            <li class="sideListLi textEllipse1" (click)="sortPrice('distanceAsc')">
+                                <input type="checkbox" id="distanceAsc" class="radioClass SortChecked" name="sortPrice">
+                                <span class="sortColor"> {{home.closestFirst}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                            <li class="sideListLi textEllipse1" (click)="sortPrice('priceAsc')">
+                                <input type="checkbox" id="priceAsc" class="radioClass SortChecked" name="sortPrice">
+                                <span class="sortColor"> {{home.lowToHighPrice}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                            <li class="sideListLi textEllipse1" (click)="sortPrice('priceDsc')">
+                                <input type="checkbox" id="priceDsc" class="radioClass SortChecked" name="sortPrice">
+                                <span class="sortColor"> {{home.highToLowPrice}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="subcatList col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> {{home.postedWithin}}</div>
+                        <ul class="sideList listnone zeroPadding marginPadding" *ngIf="catList">
+                            <li class="sideListLi textEllipse1" (click)="postedWithinList(0)">
+                                <input type="checkbox" id="0" class="radioClass checkBoxExample" name="sortPrice" >
+                                <span class="sortColor"> {{home.allListings}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                            <li class="sideListLi textEllipse1" (click)="postedWithinList('24')">
+                                <input type="checkbox" id="24" class="radioClass checkBoxExample" name="sortPrice">
+                                <span class="sortColor"> {{home.last24Hours}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                            <li class="sideListLi textEllipse1" (click)="postedWithinList('7')">
+                                <input type="checkbox" id="7" class="radioClass checkBoxExample" name="sortPrice">
+                                <span class="sortColor"> {{home.last7Days}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                            <li class="sideListLi textEllipse1" (click)="postedWithinList('30')">
+                                <input type="checkbox" id="30" class="radioClass checkBoxExample" name="sortPrice">
+                                <span class="sortColor"> {{home.last30Days}} </span>
+                                <i class="ion-checkmark-round tickMark color"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="subcatList col-xs-12 zeroPadding boxShadowList ">
+                        <div class="listBrowseTitle"> {{home.price}}</div>
+                        <ul class="sideList listnone zeroPadding marginPadding" *ngIf="catList">
+                            <li class="sideListLi col-xs-12">
+                                <div class="col-xs-4 zeroPadding">{{home.currency}}</div>
+                                <div class="col-xs-8 zeroPadding">
+                                    <select class="cursorPointer col-xs-12 zeroPadding" name="currency" [(ngModel)]="currency" #sC (change)="selectCurrency(sC.value);">
+                                        <option *ngFor="let item of currencyList" value="{{item.value}}">{{item.text}}</option>
+
+                                    </select>
+                                </div>
+                            </li>
+                            <li class="sideListLi col-xs-12">
+                                <div class="col-xs-4 zeroPadding distanceMinMax">{{home.from}}</div>
+                                <div class="col-xs-8 zeroPadding">
+                                    <input type="number" min="0" class="form-control from1 zeroPadding" #mip (change)="minimumPrice(mip.value)" (keyup)="numberDitchit(mip.value)"
+                                        (keyup.enter)="minimumPrice(mip.value)" id="fromToPricingInput" placeholder="{{home.price}}">
+                                </div>
+                            </li>
+                            <li class="sideListLi col-xs-12">
+                                <div class="col-xs-4 zeroPadding distanceMinMax">To</div>
+                                <div class="col-xs-8 zeroPadding">
+                                    <input type="number" min="0" class="form-control to1 zeroPadding" #mxp (change)="maximumPrice(mxp.value)" (keyup)="numberDitchit1(mxp.value)"
+                                        (keyup.enter)="maximumPrice(mxp.value)" id="fromToPricingInput" placeholder="{{home.price}}">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listBrowseTitle backGroundMain" style="border:0;height: 70px;"></div>
+                    <div class="filterButton">
+                        <span class="buttonPopupFilter" (click)="filterToggle()">{{home.saveFilters}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filterRecent col-xs-12 col-sm-7 col-md-8 col-lg-10 zeroPadding">
+                <div class="recentList">
+                    <!-- <div class="listHeaderTitle col-xs-12 col-sm-offset-2 col-sm-10 zeroPadding form-group">
+                    <div class="boxDefault marginPadding">Recent items near
+                        <b class="recentCity"></b>
+                    </div>
+                </div> -->
+                    <div class="recentItemCollection" id="columns" *ngIf="allList && allListData && !listsLength">
+                        <figure class="listImageItem boxShadowList" *ngFor="let list of allList">
+                            <div class="allListRecent cursorPointer" (click)="itemDetails(list.postId, list.productName)">
+                                <!-- <img class="mikeSound" src="{{home.mike}}" style="width:30px"> -->
+                                <div class="imgRecent">
+                                    <!-- <i class="mikeSound"></i> -->
+                                    <a routerLink="{{list.productName.split(' ').join('-')}}/{{list.postId}}">
+                                        <img class="" [defaultImage]="defaultImage" [lazyLoad]="list.mainUrl" [offset]="offsetImg" alt="{{list.seoTitle}}" title="{{list.seoTitle}}">
+                                    </a>
+                                    <!-- <div class="lineColor col-xs-6 zeroPadding"></div> -->
+                                </div>
+                                <div class="recentContentList col-xs-12">
+                                    <div class="itemTitle col-xs-12">{{list.productName}}</div>
+                                    <div class="itemPrice col-xs-12 zeroPadding" *ngIf="list.price">
+                                        <span class="colorGrayLight" style="font-weight:600;">{{list.currency}} {{list.price.toFixed(2)}}</span>
+                                        <!-- <div class="pull-left">
+                                            <img class="bitcoinCurrency" src="assets/images/bitcoinCurrency.svg" style="width: 20px;">
+                                        </div>
+                                        <div class="bitCoinBtc">
+                                            <span class="color">{{list.bitCoinPrice.toFixed(8)}} BTC</span>
+                                            <br> {{list.priceInUSD.toFixed(2)}} USD
+                                        </div> -->
+                                    </div>
+                                    <!-- <div class="itemDistance textEllipse col-xs-12 zeroPadding color" *ngIf="list.city != null || list.distance"><i class="ion-ios-location"></i> <span *ngIf="list.distance">{{list.distance.toFixed(2)}} Km</span>                                    <span *ngIf="list.city != null">· {{list.city}}, {{list.countrySname}}</span></div> -->
+                                </div>
+                                <div class="OwnerInfo col-xs-12">
+                                    <div class="itemDistance textEllipse col-xs-12 zeroPadding" *ngIf="list.city != null || list.distance != null">
+                                        <img class="mapIcon veticalTop" src="assets/images/map.svg" style="width: 14px;">
+                                        <span class="milesList" *ngIf="list.distance != null">{{list.distance.toFixed(2)}} {{home.miles}}</span>
+                                        <span class="textTrans" *ngIf="list.city != null">· {{list.city}}, {{list.countrySname}}</span>
+                                    </div>
+
+                                    <!-- <span class="OwnerInfoPic"><img class="OwnerInfoImg" src="{{list.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"></span>
+                                <span class="OwnerInfoTitle">{{list.postedByUserFullName}}</span> -->
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                    <div class="text-center col-xs-12 zeroPadding" *ngIf="listsLength && allListData">
+                        <h1 class="colorGray">{{home.noOffers}}.</h1>
+                        <p>{{home.sorryNotFound}}.</p>
+                        <p>
+                            <a class="color cursorPointer textDecoration">{{home.downloadApp}}</a> {{home.startPostingOffers}}.</p>
+                    </div>
+                    <div class="col-xs-12 loaderList" id="columns" *ngIf="!allListData">
+                        <div class="loaderGif"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 trustedList" style="display:none">
+            <div class="container text-center">
+                <h2 class="trustText">{{home.trustByMillions}}</h2>
+                <ul class="listnone">
+                    <li class="trustLi">
+                        <div class=""></div>
+                        <div class="trustoryImage trustImg1"></div>
+                        <div class="">{{home.blythe}}</div>
+                    </li>
+                    <li class="trustLi">
+                        <div class=""></div>
+                        <div class="trustoryImage trustImg2"></div>
+                        <div class="">{{home.robin}}</div>
+                    </li>
+                    <li class="trustLi">
+                        <div class=""></div>
+                        <div class="trustoryImage trustImg3"></div>
+                        <div class="">{{home.chris}}</div>
+                    </li>
+                    <li class="trustLi">
+                        <div class=""></div>
+                        <div class="trustoryImage trustImg4"></div>
+                        <div class="">{{home.greg}}</div>
+                    </li>
+                    <li class="trustLi">
+                        <div class=""></div>
+                        <div class="trustoryImage trustImg5"></div>
+                        <div class="">{{home.heidi}}</div>
+                    </li>
+                    <li class="trustLi">
+                        <div class=""></div>
+                        <div class="trustoryImage trustImg6"></div>
+                        <div class="">{{home.krystal}}</div>
+                    </li>
+                </ul>
+                <h4 class="col-xs-12 trustStories color cursorPointer">{{home.readTitleStories}}
+                    <i class="ion-arrow-right-c"></i>
+                </h4>
+            </div>
+        </div>
+        <div class="col-xs-12 homepageCoverFooter" style="display:none">
+            <div class="container">
+                <div class="covetFooter col-xs-12 col-sm-6 zeroPadding colorWhite">
+                    <h2 class="textapp" style="padding-top: 40px;">{{home.getApp}}</h2>
+                    <p>{{home.joinMillions}}</p>
+                    <br>
+                    <br>
+                    <div class="appStoreIcon">
+                        <span class="">
+                            <a target="_blank" href="#">
+                                <img class="stroeIcon cursorPointer" src="{{home.googlePlayStore}}" alt="">
+                            </a>
+                        </span>
+                        <span class="">
+                            <a href="#">
+                                <img class="stroeIcon cursorPointer" src="{{home.appStore}}" alt="">
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="loveJob col-xs-12 text-center" style="display:none">
+            <br>
+            <h2 class="textapp form-group">{{home.loveJob}}</h2>
+            <div class="col-xs-12 zeroPadding form-group">
+                <span class="positionEngineer">
+                    <i class="ion-android-phone-portrait"></i> {{home.srAndroidEngineer}}</span>
+                <span class="positionEngineer">
+                    <i class="ion-android-phone-portrait"></i> {{home.srIOSEngineer}}</span>
+                <span class="positionEngineer">
+                    <i class="ion-android-phone-portrait"></i> {{home.srBackendEngineer}}</span>
+            </div>
+            <h4 class="col-xs-12 trustStories color cursorPointer">{{home.seePositions}}
+                <i class="ion-arrow-right-c"></i>
+            </h4>
+        </div>
+
+    </div>
+</div>
+
+<!-- sell popup -->
+<div class="modal fade playVideoItWorks" id="howItWorksVideo" role="dialog">
+    <div class="modal-dialog" style="margin-top:12%;">
+
+        <!-- Modal content-->
+        <div class="modal-content col-xs-12 zeroPadding">
+            <div class="modal-body col-xs-12 zeroPadding">
+                <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- sell on popup -->
+<div class="modal fade" id="sellModalhow" role="dialog">
+    <div class="modal-dialog" style="margin-top:12%;">
+
+        <!-- Modal content-->
+        <div class="modal-content col-xs-12 zeroPadding">
+            <div class="modal-body sellPopup col-xs-12 zeroPadding">
+                <button type="button" class="close" data-dismiss="modal" style="color:initial;">&times;</button>
+                <div class="col-xs-12 contentSell" *ngIf="!succesSeller">
+                    <h1 class="text-center colorGray">{{home.sendAppLink}}</h1>
+                    <div class="phonOrEmail col-xs-12 padMore text-center" *ngIf="!howPopupSuccess">
+                        <div class="emailList col-xs-12 zeroPadding">
+                            <img class="howPopupImg" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/howEmail.png">
+                            <input type="text" name="sellEmail" [(ngModel)]="sellEmail" #hv (keyup)="emailValidation(hv.value)" (change)="emailValidation(hv.value)"
+                                class="inputEmail form-control input-lg" placeholder="{{emailPlaceHolder}}">
+                        </div>
+                        <h5 class="errorMsg" *ngIf="email_Error">{{home.provideValidEmail}}</h5>
+                        <div class="colorGray col-xs-12 zeroPadding">
+                            <b>or</b>
+                        </div>
+                        <div class="phoneList col-xs-12 zeroPadding form-group">
+                            <img class="howPopupImg" src="{{howPhone}}">
+                            <input type="text" name="sellPhone" [(ngModel)]="sellPhone" #hp (keyup)="mobileValidation(hp.value)" (change)="mobileValidation(hp.value)"
+                                class="inputEmail form-control input-lg" placeholder="123-456-7890">
+                        </div>
+                        <h5 class="errorMsg" *ngIf="phone_Error">{{home.enterNumberCountryCode}} </h5>
+                        <h5 class="errorMsg" *ngIf="PEerror">{{PEerror}}</h5>
+                        <div class="sendSell submitLogin col-xs-12 zeroPadding">
+                            <button type="button" class="btn btnSubmit" (click)="sellHowSend()" [disabled]="!(registerSave)">{{home.send}}</button>
+                        </div>
+                    </div>
+                    <div class="successTextHow col-xs-12 padMore text-center" *ngIf="howPopupSuccess">
+                        <h3>{{home.recentRequestApp}}</h3>
+                        <p style="margin-top:20px">{{home.minsToReceive}}</p>
+                        <p>{{home.wait5Mins}}
+                            <br> {{home.makeOtherRequest}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 sellMobileImg text-center" *ngIf="succesSeller">
+                    <br>
+                    <br>
+                    <br>
+                    <h1 class="sizeLarge">{{home.thankYou}}</h1>
+                    <h1 class="sizeMedium">{{home.minsToReceive}}</h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- current location -->
+<div class="modal fade" id="locationMap" data-backdrop="static" data-keyboard="false" role="dialog" style="background-color: rgba(238, 238, 238, 0.95);">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" style="display:inline-block;width:100%;">
+                <div class="mapLocation">
+                    <div class="locateTitle">
+                        <span class="closeIcon" data-dismiss="modal">X</span>
+                        <span class="title">Change Location</span>
+                    </div>
+                    <div class="listInput">
+                        <input type="text" class="location  addressArea form-control" id="changeLocationId" (keyup)="changeLocation()" (change)="locationChange()"
+                            placeholder="Change Location" value="">
+                        <span class="ion-android-locate ionsLocate" style="font-size:20px;" (click)="setCurrentLocation()"></span>
+                    </div>
+                    <div class="mapData" id="mapData"></div>
+                    <div class="setLocation col-xs-12 zeroPadding" data-dismiss="modal" (click)="locationChange1();">
+                        <span class="btnLocate">Set Location</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<title>{{discussions.titleBuySellSimple}}</title>
+
+<div class="offerListDetails messageDiscuss col-xs-12 zeroPadding">
+  <br>
+  <div class="container">
+    <div class="itemSellLocally col-xs-12 zeroPadding">
+      <div class="col-xs-12  offersDetails paddingLeft form-group">
+        <div class="col-xs-12 zeroPadding sizeMedium colorGray form-group cursorPointer" routerLink="../items">
+          <i class="ion-arrow-left-c"></i> {{discussions.myOffers}}
+        </div>
+        <div class="col-xs-12 boxShadowList zeroPadding msgProfile form-group">
+          <div class="imgLfet pull-left">
+            <img class="proDissImg" src="" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+          </div>
+          <div class="profContent colorGray padMoree">
+            <div class=""> {{discussions.keyBoard}} </div>
+            <div class="colorGrayLight"> <b>{{discussions.$}}{{discussions.twoHundred}}</b> </div>
+          </div>
+        </div>
+        <div class="col-xs-12 boxShadowList listChatMsg zeroPadding">
+          <div class="col-xs-12 padMore bottomColor chatDiv">
+            <div class="imgLfet pull-left">
+              <img class="proDissImgChat" src="" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+            </div>
+            <div class="profContent colorGray">
+              <div class="">{{discussions.Jeffery}} <span class="colorGrayLight sizeSmall"><i class="ion-android-time"></i> {{discussions.one}} {{discussions.month}} {{discussions.ago}}</span></div>
+              <div class="colorGrayLight"> {{discussions.hey}}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 padMore bottomColor chatDivSend">
+            <div class="imgLfet pull-left">
+              <img class="proDissImgChat" src="{{profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+            </div>
+            <div class="profContent colorGray pull-left">
+              <textarea cols="15" rows="4" class="chatSendText colorGray padMoree" placeholder="{{discussions.replyToss}}"></textarea>
+            </div>
+            <div class="sendButtonChat">
+              <button type="button" class="btn btnDataMsg"><i class="ion-paper-airplane"></i> {{discussions.send}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 zeroPadding text-center color cursorPointer" data-toggle="modal" data-target="#reportItemPopup">
+        <i class="ion-ios-flag"></i> {{discussions.report}}
+      </div>
+    </div>
+  </div>
+
+  <!-- report popup -->
+
+  <div class="modal fade itemPopupAll" id="reportItemPopup" role="dialog">
+    <div class="modal-dialog" style="margin-top:12%;">
+
+      <!-- Modal content-->
+      <div class="modal-content col-xs-12 zeroPadding">
+        <div class="modal-header col-xs-12 zeroPadding">
+          <button type="button" class="close" data-dismiss="modal" style="font-size: 30px;font-weight:200;">&times;</button>
+        </div>
+        <div class="modal-body col-xs-12 zeroPadding padMoree">
+          <div class="nameImg col-xs-12 zeroPadding form-group">
+            <span class="pull-left"><img class="borerRadiusImg" width="50" height="50" src="" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"></span>
+            <span class="textReportTitle">
+            <div class="">{{discussions.sabari}}</div>            
+          </span>
+          </div>
+          <div class="col-xs-12 zeroPadding form-group" *ngIf="!reportUser">
+            <div class="col-xs-12 zeroPadding form-group">{{discussions.whyreport}}</div>
+            <ul class="listnone col-xs-12 zeroPadding" (click)="reportUser= !reportUser">
+              <li class="reportLi">{{discussions.prohibited}}</li>
+              <li class="reportLi">{{discussions.offensive}}</li>
+              <li class="reportLi">{{discussions.notReal}}</li>
+              <li class="reportLi">{{discussions.duplicate}}</li>
+              <li class="reportLi">{{discussions.wrongCategory}}</li>
+              <li class="reportLi">{{discussions.scam}}</li>
+              <li class="reportLi">{{discussions.stolen}}</li>
+              <li class="reportLi">{{discussions.other}}</li>
+            </ul>
+          </div>
+          <div class="col-xs-12 zeroPadding form-group" *ngIf="reportUser">
+            <div class="col-xs-12 zeroPadding form-group">{{discussions.additionalNote}}</div>
+            <div class="col-xs-12 zeroPadding form-group">
+              <textarea cols="40" maxlength="1000" name="message" rows="10" placeholder="{{writeNotehere}}" class="col-xs-12 padMoree borerRadius id_message"></textarea>
+            </div>
+            <div class="col-xs-12 zeroPadding">
+              <button class="btn btnData col-xs-12" data-dismiss="modal" type="button">{{discussions.done}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

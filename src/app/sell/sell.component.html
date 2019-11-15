@@ -1,0 +1,133 @@
+<title>{{sell.sellTitle}}</title>
+
+<div class="YeloHome leftResult col-xs-12 zeroPadding" style="margin-top:55px;min-height:34em;">
+  <div class="container-fluid">
+    <div class="recentList">
+      <br>
+      <div class="sideDetails col-xs-4 col-sm-2 paddingLeft">
+        <div class="browseListCat allListRecent boxShadowList zeroPadding">
+          <div class="listBrowseTitle"> {{sell.browse}}</div>
+          <ul class="sideList listnone padMore marginPadding" *ngIf="catList">
+            <li class="sideListLi textEllipse border" *ngFor="let cat of catList" (click)="searchCategoryName(cat.name)">{{cat.name}}</li>
+          </ul>
+          <ul class="sideList listnone padMore marginPadding" *ngIf="!catList">
+            <li class="sideListLi">
+              <a class="textDecoration colorGrayLight">{{sell.noCategory}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="boxShadowList allListRecent text-center browseListCatterms padMoree" style="margin:15px 0px">
+          <div class="colorGrayLight col-xs-12 zeroPadding">
+            <span class="termsHome" routerLink="../terms">{{sell.terms}}</span>
+            <span class="termsHome" routerLink="../privacy">{{sell.privacy}}</span>
+          </div>
+          <div class="colorGrayLight padMoree col-xs-12">{{sell.mobiVentaCopyRights}}</div>
+        </div>
+      </div>
+
+      <div class="recentItemCollection  col-xs-8 col-sm-10 paddingRight">
+        <div class="listHeaderTitle col-xs-12 zeroPadding form-group">
+          <div class="boxDefault marginPadding">
+            <h4 class="marginPadding">
+              <b>{{sell.sellStuff}}:</b>
+            </h4>
+            <p>dfgsd dfgsdfg</p>
+          </div>
+        </div>
+        <div class="allContentSell boxShadow col-xs-12 zeroPadding">
+          <div class="collectionImg col-xs-12 zeroPadding">
+            <h5 class="col-xs-12 zeroPadding">Add photos of your product</h5>
+            <div class="col-xs-12 editImagesell zeroPadding cursorPointer">
+              <span class="" *ngIf="productImg">
+                <img class="sellImg" *ngFor="let img of productImg" src="{{img}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+              </span>
+              <span class="emptyImg">
+                <img class="sellImg" src="" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+                <input type="file" id="uploadSellInput" name="image" accept="image/*" class="yeloProfileImage" (change)="fileUploader()"
+                  ng2FileSelect [uploader]="uploader" multiple>
+              </span>
+            </div>
+            <!-- <span class="">
+              <img src="" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+            </span> -->
+            <h5 class="col-xs-12 zeroPadding">Add upto 5 images (optional)</h5>
+          </div>
+          <hr class="col-xs-12 zeroPadding">
+          <div class="formLists col-xs-12 zeroPadding">
+            <div class="sellingList col-xs-12 col-sm-6 col-md-4">
+              <div class="formList col-xs-12 zeroPadding">
+                <label class="labels col-xs-12 zeroPadding">What you are selling ?</label>
+                <input type="text" name="" class="form-control inputBox">
+                <textarea name="" class="form-control inputBox" rows="4" cols="4" style="resize:none;height:auto"></textarea>
+              </div>
+              <div class="formList col-xs-12 zeroPadding">
+                <label class="labels col-xs-12 zeroPadding">What is your product based on ?</label>
+                <select name="" class="form-control inputBox">
+                  <option value="" disabled selected>Select Category</option>
+                  <option value="{{list.name}}" *ngFor="let list of  catList">{{list.name}}</option>
+                </select>
+                <!-- <select name="" class="form-control inputBox">
+                  <option value="">test</option>
+                </select> -->
+              </div>
+              <div class="formList col-xs-12 zeroPadding">
+                <label class="labels col-xs-12 zeroPadding">Where the product is located ?</label>
+                <input type="text" name="" class="form-control inputBox">
+              </div>
+            </div>
+            <div class="priceLists col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
+              <div class="formList col-xs-12 zeroPadding">
+                <label class="labels col-xs-12 zeroPadding">Price ?</label>
+                <input type="text" name="" class="form-control inputBox">
+              </div>
+              <div class="formList col-xs-12 zeroPadding">
+                <label class="labels col-xs-12 zeroPadding">Additional details ?</label>
+                <input type="text" name="" class="form-control inputBox">
+              </div>
+              <div class="formList col-xs-12 zeroPadding">
+                <label class="labels col-xs-12 zeroPadding">Share your stuff ?</label>
+                <div class="toggleSwitch col-xs-12 zeroPadding">
+                  <span class="titleSwitch">
+                    Facebook
+                  </span>
+                  <span class="changeSitch pull-right">
+                    <label class="switch">
+                      <input type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </span>
+                </div>
+                <div class="toggleSwitch col-xs-12 zeroPadding">
+                  <span class="titleSwitch">
+                    Instagram
+                  </span>
+                  <span class="changeSitch pull-right">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </span>
+                </div>
+                <div class="toggleSwitch col-xs-12 zeroPadding">
+                  <span class="titleSwitch">
+                    Twitter
+                  </span>
+                  <span class="changeSitch pull-right">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 buttonPost">
+              <button type="button" class="btn btnPost">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>

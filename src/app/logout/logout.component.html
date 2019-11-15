@@ -1,0 +1,32 @@
+<!--<div class="recentItemCollection" id="columns" *ngIf="allList">  
+  <figure class="sideDetails boxShadowList">
+    <div class="listBrowseTitle"> Browse</div>
+    <ul class="sideList listnone padMore marginPadding" *ngIf="catList">
+      <li class="sideListLi textEllipse" *ngFor="let cat of catList">{{cat.categoryName}}</li>
+      <li class="sideListLi"> <a class="textDecoration colorGrayLight" routerLink="./search">More...</a></li>
+    </ul>
+  </figure>
+  <figure class="text-center padMoree sizeSmall sideDetails boxShadowList">
+    <div class="colorGrayLight col-xs-12 zeroPadding">
+      <span class="termsHome">Terms</span>
+      <span class="termsHome">Privacy</span>
+    </div>
+    <div class="colorGrayLight padMoree col-xs-12">© 2017 OfferUp, Inc.</div>
+  </figure>
+  <figure class="listImageItem boxShadowList" *ngFor="let list of allList">
+    <div class="allListRecent cursorPointer" (click)="itemDetails(list.postId)">
+      <div class="imgRecent">
+        <img class="" src="{{list.mainUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';" alt="Yelo">
+      </div>
+      <div class="recentContentList col-xs-12">
+        <div class="itemTitle textEllipse col-xs-12 zeroPadding colorGray">{{list.category}}</div>
+        <div class="itemPrice col-xs-12 zeroPadding"> {{list.price}}</div>
+        <div class="itemDistance textEllipse col-xs-12 zeroPadding color"><i class="ion-ios-location"></i> {{list.place}}</div>
+      </div>
+      <div class="OwnerInfo col-xs-12">
+        <span class="OwnerInfoPic"><img class="OwnerInfoImg" src="{{list.thumbnailImageUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"></span>
+        <span class="OwnerInfoTitle">{{list.postedByUserName}}</span>
+      </div>
+    </div>
+  </figure>
+</div>-->

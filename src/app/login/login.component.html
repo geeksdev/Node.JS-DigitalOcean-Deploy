@@ -1,0 +1,146 @@
+<title *ngIf="data">{{data.title}}</title>
+<div class="containerDark" style="min-height:40em">
+</div>
+<div class="popupChangeSocial">
+  <div class="itemSellLocally1 allSocialPopup col-xs-12 zeroPadding">
+    <div class="container-dark">
+
+    </div>
+    <div class="container-mid-float">
+      <!-- <div class="  clear-fix text-center">
+    <div class="reg-signup-intro-text mgbtm0">
+      <p>Log In with
+        <span class="intro-logo">
+          <img src="assets/images/logo_bottom.svg" width="132">
+        </span> Las Vegas's Hottest ICO</p>
+    </div>
+  </div>
+  <div class="col-md-12 offer text-center mgbtm0">
+    <p>Early Bird Sign Ups Receive A
+      <span class="impText">Free</span> $150 in Ad Credits </p>
+  </div> -->
+
+      <button type="button" class="close cancelButton" routerLink="">&times;</button>
+
+      <div class=" form-box clear-fix">
+
+        <div class="col-md-7 col-sm-12 fix-height form-side-banner padding-zero hide-for-smallscreen">
+          <img class="fix-height" src="{{loginSub.formBackground}}">
+        </div>
+
+        <div class="col-md-5 col-sm-12 fix-height background-fade ">
+          <div class="col-md-12">
+            <div class="emptydiv25"></div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-logo text-center">
+              <b>{{loginSub.loginTo}} </b>
+              <img src="{{loginSub.loginLogo}}" style="width:90px;vertical-align: top;">
+            </div>
+          </div>
+          <!-- <div class="col-md-12"><div class="emptydiv25"></div></div> -->
+          <div class="col-md-12">
+            <div class="emptydiv25"></div>
+          </div>
+
+          <!-- <div class="col-md-12">
+        <div class="col-md-6 col-sm-6 col-xs-6 social-connect-section">
+          <img class="width-fix" src="assets/images/logo-facebook.png">
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 social-connect-section">
+          <img class="width-fix" src="assets/images/logo-gmail.png">
+        </div>
+      </div> -->
+          <!-- <div class="col-md-12">
+        <hr class="hr">
+        <span class="float-option-text">OR</span>
+      </div> -->
+          <div class="SocialLink col-xs-12 zeroPadding form-group" *ngIf="!LoginFb">
+            <div class="linkContent text-center col-xs-12 zeroPadding">
+              <span class="borderLine"></span>
+              <span class="borderLineText">QUICKLY CONNECT WITH</span>
+            </div>
+            <div class="socialLoginButton col-xs-12 padMore">
+                <div class="loaderGif" *ngIf="loaderButtonfb"></div>
+              <div type="button" class="socialButton loginFb form-group" (click)="onFacebookLoginClick()">
+                Continue with Facebook
+                <i class="socialIon ion-social-facebook"></i>
+              </div>
+              <!-- <div type="button" class="socialButton logingoogle" (click)="onGoogleLoginClick()">
+                  Continue with Google
+                  <i class="socialIon ion-social-google"></i>
+                </div> -->
+            </div>
+            <div class="linkContent text-center col-xs-12 zeroPadding">
+              <span class="borderLine"></span>
+              <span class="borderLineText">OR USE YOUR EMAIL</span>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="LoginFb">
+            <div class="input-form">
+
+              <div class="col-md-12 text-muted input-div">
+                <div class="col-md-5">
+                  <p class="input-header pad-top-5">{{loginSub.userName}}</p>
+                </div>
+                <div class="col-md-7">
+                  <input class="input-data" type="text" #uc (keyup)="checkUserName(uc.value)" [(ngModel)]="userName">
+                </div>
+              </div>
+
+
+              <div class="col-md-12 text-muted input-div">
+                <div class="col-md-5">
+                  <p class="input-header pad-top-5">{{loginSub.passWord}}</p>
+                </div>
+                <div class="col-md-7">
+                  <input class="input-data" type="password" [(ngModel)]="password">
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="notify">
+                {{loginSub.byClicking}}
+                <span>
+                  <a routerLink="../terms">{{loginSub.termsService}}</a>
+                </span> {{loginSub.and}}
+                <span>
+                  <a routerLink="../privacy">{{loginSub.privacyPolicy}}.</a>
+                </span>
+              </p>
+            </div>
+
+            <div class="col-md-12 text-center" *ngIf="LoginFb">
+              <div class="loader loginPage loaderGif" *ngIf="loaderButton"></div>
+              <button class="sign-up sign-in-button" (click)="login()">{{loginSub.login}}</button>
+            </div>
+            <div class="errorMsg col-md-12 col-xs-12 text-center" *ngIf="registerErrMsg">{{registerErrMsg}}</div>
+            <div class="col-md-12">
+              <div class="emptydiv70"></div>
+            </div>
+            <div class="col-md-12 text-center form-footer" *ngIf="!LoginFb">
+              Already have an account?
+              <span class="log-in-button" (click)="LoginFb = !LoginFb"> Login </span>
+            </div>
+            <div class="col-md-12 text-center form-footer" *ngIf="LoginFb">
+              Login With Facebook?
+              <span class="log-in-button" (click)="LoginFb = !LoginFb"> Facebook Login </span>
+            </div>
+            <div class="col-md-12 text-center form-footer">
+              {{loginSub.notRegistered}}
+              <span class="log-in-button" routerLink="../register"> {{loginSub.signUp}} </span>
+            </div>
+            <div class="col-md-12 text-center form-footer">
+              {{loginSub.forgotPassword}}
+              <span class="log-in-button" routerLink="../reset"> {{loginSub.reset}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

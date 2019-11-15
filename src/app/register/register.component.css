@@ -1,0 +1,5 @@
+@media (min-width: 1200px){
+    .allRegisterList .container {
+        width: 970px !important;
+    }
+}

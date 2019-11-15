@@ -1,0 +1,396 @@
+<title>{{settings.settingsTitle}}</title>
+<div class="loaderBackground" [hidden]="allListProfile">
+  <div class="loader"></div>
+</div>
+
+<div class="offerListDetails settingList col-xs-12" [hidden]="!allListProfile" style="min-height:35em;margin-top:50px">
+  <div class="mainWrap">
+    <div class="container">
+      <div class="itemSellLocallyList col-xs-12 zeroPadding">
+        <section class="profilePageWrap">
+          <!--profileTitleSection-->
+          <section class="profileTitleSection">
+            <div class="col-xs-12 profileTitle" *ngIf="editProfile">
+              <span class="" *ngIf="editProfile.fullName">{{editProfile.fullName}}</span>
+              <span class="" *ngIf="!editProfile.fullName">{{editProfile.username}}</span>
+              <h5 class="" *ngIf="editProfile.place != 'null'">{{editProfile.place}}</h5>
+            </div>
+            <div class="profileEdit">
+              <i class="profileEditdeskView ion-arrow-left-c" routerLink="" id="edit_profile_trigger" style="right:0;left:15px;" alt="Bingalo">
+              </i>
+              <!-- <i class="profileEditdeskView ion-ios-gear" id="edit_profile_trigger" data-toggle="modal" data-target="#editProfile1" alt="Bingalo">
+              </i> -->
+              <img class="profileEditdeskView" id="edit_profile_trigger" data-toggle="modal" data-target="#editProfile1" src="assets/images/editProfileImg.svg"
+                style="width:13px;position: absolute;right: 15px;top: 30px;" alt="edit">
+
+            </div>
+          </section>
+          <!--profileTitleSection-->
+
+          <!--profileDetailsSection-->
+          <section class="profileDetailsSection">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 profileDetails">
+              <div class="profileDetailsImage">
+                <img class="profileDetailsSectionImage" src="{{editProfile.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"
+                  alt="Bingalo">
+                <div class="starsLayout col-xs-12 zeroPadding">
+                  <span class="startImg" [class.active]="list.star == true" *ngFor="let list of emptyStar"></span>
+                </div>
+                <h5 class="">{{settings.verifiedWith}}</h5>
+
+              </div>
+              <div class="socialMediaIcons" *ngIf="editProfile">
+                <img class="" *ngIf="editProfile.facebookVerified == 1" src="{{settings.settingsFBOn}}" title="Facebook Connected" alt="">
+                <img class="" *ngIf="editProfile.facebookVerified == null || editProfile.facebookVerified == 0" title="Facebook Not Connected" (click)="signInWithFB()"
+                src="{{settings.settingsFBOff}}" alt="">
+                <img class="" *ngIf="editProfile.googleVerified == 1" src="{{settings.settingsGOn}}" alt="" title="Google+ Connected">
+                <img class="" *ngIf="editProfile.googleVerified == null" src="{{settings.settingsGOff}}" alt="" title="Google+ Not Connected" (click)="signInWithGoogle()"> 
+                <img class="" *ngIf="editProfile.emailVerified == 1" title="Bingalo Verified" src="{{settings.settingsEmailOn}}" alt="">
+                <img class="" *ngIf="editProfile.emailVerified != 1" (click)="emailClick();" title="Email Not Verified" src="{{settings.settingsEmailOff}}"
+                 alt="">
+                 <img class="" *ngIf="editProfile.paypalUrl != null" title="paypal Verified" src="{{settings.settingspayOn}}" alt="">
+                 <img class="" *ngIf="editProfile.paypalUrl == null" data-dismiss="modal" data-toggle="modal" data-target="#paypalPopup" title="paypal Not Verified"
+                   src="{{settings.settingspayOff}}" alt="">
+                <!-- <div class="titleBuildTrust" (click)="buildTrusts()">
+                  <img class="" src="assets/images/tickicon.svg" alt="Bingalo">
+                  <span>Build Trust</span>
+                </div> -->
+              </div>
+              <div class="profileFollowersSection">
+                <ul class="profileFollowersUL">
+                  <li>
+                    <a>{{postLength}} {{settings.posts}}</a>
+                  </li>
+                  <li>
+                    <a class="cursorPointer" data-toggle="modal" data-target="#myModal" (click)="getFollowers()">
+                      <span>{{followerLength}}</span>
+                      {{settings.followers}}
+                    </a>
+                  </li>
+                  <li style="border: 0">
+                    <a class="cursorPointer" data-toggle="modal" data-target="#myModal" (click)="getFollowing()">
+                      <span>{{followingLength}}</span> {{settings.following}}</a>
+                  </li>
+                  <div class="clearfix"></div>
+                </ul>
+              </div>
+              <div class="" *ngIf="editProfile">
+                <a href="//{{editProfile.websiteUrl}}" target="_blank" class="cursorPointer profileVisitingWebsiteLink">{{editProfile.websiteUrl}}</a>
+                <p class="profileText">{{editProfile.bio}}</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+            </div>
+            <div class="clearfix"></div>
+          </section>
+          <!--profileDetailsSection-->
+
+
+          <!--productSection-->
+          <section class="productSectionPills">
+            <ul class="nav nav-pills" style="background: #fff;">
+              <li class="col-xs-4 col-sm-2 col-lg-1 productSectionHeader active zeroPadding marginPadding">
+                <a (click)="allListProcess(0)" data-toggle="pill" href="#selling">{{settings.selling}}</a>
+              </li>
+              <li class="col-xs-4 col-sm-2 col-lg-1 productSectionHeader zeroPadding marginPadding">
+                <a (click)="allListProcess(1)" data-toggle="pill" href="#selling">{{settings.sold}}</a>
+              </li>
+              <li class="col-xs-4 col-sm-2 col-lg-1 productSectionHeader zeroPadding marginPadding">
+                <a (click)="allListProcess(2)" data-toggle="pill" href="#selling">{{settings.favourites}}</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <!--productSection-->
+              <div id="selling" class="tab-pane fade in active">
+                <!--loader-->
+                <div class="col-xs-12 zeroPadding recentList form-group">
+                  <div class="loaderGif" style="top:auto;z-index: 999;position:relative" *ngIf="loaderButton"></div>
+                  <!--loader-->
+                  <!--productSectionNot-->
+                  <div class="col-xs-12 boxShadowList1 padMore errorData" *ngIf="!offerListLength && !loaderButton">
+                    <h4 class="text-center sizeLarge1">{{settings.noListYet}}</h4>
+                    <!-- <div class="col-xs-12 padMore text-center">
+                    <h1 class="text-center sizeLarge colorGray">Get the app!</h1>
+                    <span class="">
+                      <img class="stroeIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/google-play.svg" alt="">
+                    </span>
+                    <span class="">
+                      <img class="stroeIcon" src="https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/app-store.svg" alt="">
+                    </span>
+                    <br>
+                    <br>
+                    <div class="itemPriceList col-xs-12 zeroPadding">
+                      <div class="offerButton btn" routerLink="" style="width:160px;">Browse now</div>
+                    </div>
+                  </div> -->
+                  </div>
+                  <!--productSectionNot-->
+                  <div class="col-xs-12 zeroPadding" id="columns" *ngIf="offerListLength && sellingOffer && !loaderButton">
+                    <figure class="listImageItem boxShadowList" *ngFor="let list of sellingOffer">
+                      <div class="allListRecent cursorPointer" (click)="itemDetails(list.postId)">
+                        <div class="imgRecent">
+                          <img class="productCategoryImage" src="{{list.mainUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"
+                            alt="MobiVenta">
+                        </div>
+                        <div class="recentContentList col-xs-12">
+                          <div class="itemTitle textEllipse col-xs-12 colorGray">{{list.productName}}</div>
+                          <div class="itemPrice color col-xs-12 zeroPadding">
+                            {{list.currency}} {{list.price}}
+                          </div>
+                        </div>
+                        <!-- <div class="locationLayout">
+                        <span class="ion-location"></span>
+                        <span class="">9 miles -</span>
+                        <span class="">{{list.place}}</span>
+                      </div> -->
+                      </div>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+          <!--productSection-->
+
+
+
+          <!--followers Model-->
+          <section class="followersSection">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{tileFollowers}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="followers">
+                      <div class="" *ngIf="!followingErr">
+                        <div class="" *ngFor="let list of following; let i = index">
+                          <div class="followersList">
+                            <div class="col-xs-1 zeroPadding">
+                              <img class="" src="{{list.profilePicUrl}}" onError="this.src='assets/images/default-thumnail.png'">
+                            </div>
+                            <div class="col-xs-8 followersHeadersMobileView">
+                              <h4 class="">{{list.username}}</h4>
+                              <h5 class="">{{list.fullName}}</h5>
+                            </div>
+                            <div class="col-xs-3 followersbuttonMobileView paddingLeft">
+                              <div class="loader" *ngIf="list.loaderFlag==true"></div>
+                              <div class="" *ngIf="list.userFollowRequestStatus  == 1">
+                                <button type="button" class="btn btn-primary btn-xs" (click)="unFollowButton(list.username, i)" id="followingButton">Following</button>
+                              </div>
+                              <div class="" *ngIf="list.userFollowRequestStatus  == null">
+                                <button type="button" class="btn btn-primary btn-xs follow" (click)="followerButton(list.username, i)" id="followButton">Follow</button>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="loaderGif" style="top:auto;z-index: 999;position:relative" *ngIf="loaderButtonPopup"></div>
+                      <div class="text-center" *ngIf="followingErr && !loaderButtonPopup">
+                        {{followingErr}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+            <!--followers Model-->
+          </section>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="errorPopup" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Internet Error</h4>
+      </div>
+      <div class="modal-body">
+        <p>Please check your internet settings</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Modal -->
+
+<!-- build trust-->
+<div class="modal fade" id="buildTrustPopup" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header text-center" style="border: 0">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Build Trust</h4>
+      </div>
+      <div class="modal-body">
+        <div class="socialMediaIcons text-center" *ngIf="editProfile">
+          <img class="" *ngIf="editProfile.facebookVerified == 1" src="{{settings.settingsFBOn}}" title="Facebook Connected" alt="">
+          <img class="" *ngIf="editProfile.facebookVerified == null || editProfile.facebookVerified == 0" (click)="signInWithFB()"
+            title="Facebook Not Connected" src="{{settings.settingsFBOff}}" alt="">
+          <img class="" *ngIf="editProfile.googleVerified == 1" src="{{settings.settingsGOn}}" alt="" title="Google+ Connected">
+          <img class="" *ngIf="editProfile.googleVerified == null" src="{{settings.settingsGOff}}" (click)="signInWithGoogle()" alt=""
+            title="Google+ Not Connected">
+          <img class="" *ngIf="editProfile.emailVerified == 1" title="Email Verified" src="{{settings.settingsEmailOn}}" alt="">
+          <img class="" *ngIf="editProfile.emailVerified != 1" data-dismiss="modal" (click)="emailClick();" title="Email Not Verified"
+            src="{{settings.settingsEmailOff}}" alt="">
+          <img class="" *ngIf="editProfile.paypalUrl != null" title="paypal Verified" src="{{settings.settingspayOn}}" alt="">
+          <img class="" *ngIf="editProfile.paypalUrl == null" data-dismiss="modal" data-toggle="modal" data-target="#paypalPopup" title="paypal Not Verified"
+            src="{{settings.settingspayOff}}" alt="">
+        </div>
+      </div>
+      <div class="modal-footer" style="border: 0;text-align: center;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- paypal link-->
+<div class="modal fade" id="paypalPopup" role="dialog">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Connect Paypal</h4>
+      </div>
+      <div class="modal-body" style="background: hsl(0, 0%, 93%);">
+        <div class="socialMediaIcons linkPaypal">
+          <div class="titleLink">If you already have a Paypal.me link add it here</div>
+          <div class="titleLink colorGray">Example:https://www.paypal.me/Bingalo</div>
+          <input type="text" name="payPal" [(ngModel)]="payPal" class="form-control paypalInput" placeholder="https://www.paypal.me/your name">
+          <!-- <div class="titleLink">If you already have a Paypal.me link add it here</div> -->
+          <div class="" style="position: relative;">
+            <div class="loader loginPage loaderGif" *ngIf="loaderButtonProfile" style="top: 25px !important;"></div>
+            <button type="button" class="btn btnPaypal" (click)="payPalList()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- editProfile Modal -->
+<section class="rightModal editProfileModal" id="editProfileModal">
+  <div class="modal right fade zeroPadding" id="editProfile1" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Profile</h4>
+        </div>
+        <div class="modal-body">
+          <div class="" *ngIf="editProfile">
+            <div class="editImage">
+              <div class="col-xs-2 editImageLayout zeroPadding cursorPointer">
+                <!-- <img class="" *ngIf="editProfile" src="{{editProfile.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';"> -->
+                <img class="settingImg" src="{{editProfile.profilePicUrl}}" onError="this.src='https://d2qb2fbt5wuzik.cloudfront.net/yelowebsite/images/default-thumnail.png';">
+                <input type="file" id="uploadProfileInput" name="image" accept="image/*" class="yeloProfileImage" (change)="fileUploader()"
+                  ng2FileSelect [uploader]="uploader">
+
+              </div>
+              <div class="col-xs-10 editImageDescription">
+                <h5 class="changeImageH5">Tap the photo to change it</h5>
+                <h5 class="formatImageH5">Images must be in PNG or JPG format and under 5mb</h5>
+              </div>
+            </div>
+          </div>
+          <div class="editProfileForm" (keydown)="keyDownFunction($event)">
+
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" [(ngModel)]="editProfile.fullName" name="fullName">
+              <div class="errorMsg" *ngIf="!editProfile.fullName">This field is required.</div>
+            </div>
+            <div class="form-group">
+              <label for="userName">User Name</label>
+              <input type="text" class="form-control" id="userName" [(ngModel)]="editProfile.username" name="username" placeholder="userName">
+              <div class="errorMsg" *ngIf="!editProfile.username">This field is required.</div>
+            </div>
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <input type="text" class="form-control" id="bio" [(ngModel)]="editProfile.bio" name="bio" placeholder="bio">
+            </div>
+            <div class="form-group">
+              <label for="website">Website</label>
+              <input type="text" class="form-control" id="website" [(ngModel)]="editProfile.websiteUrl" placeholder="website">
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="hidden" class="form-control place" name="location">
+              <input type="hidden" class="form-control lat" name="location">
+              <input type="hidden" class="form-control lng" name="location">
+              <input type="text" class="form-control" id="location" [(ngModel)]="editProfile.place" name="location">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="editProfile.email" name="email">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <!-- <input type="text" class="form-control" id="phone" placeholder="9066352045" name="phone"> -->
+              <input class="form-control input-md" id="mobileSignin" type="text" [(ngModel)]="editProfile.phoneNumber" name="phone" style="padding-left: 85px !important;display: inline-block;">
+              <!-- <input class="form-control input-md" id="mobileSignin" data-toggle="collapse" type="text" placeholder="" name="phone"> -->
+            </div>
+
+            <div class="editProfileSubmit">
+              <h5 class="cursorPointer" (click)="changePassword()">Change Password</h5>
+              <div class="col-xs-12 zeroPadding text-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+              <div class="loader loginPage loaderGif" *ngIf="loaderButtonProfile"></div>
+              <button type="button" class="btn btn-primary btn-sm" (click)="saveProfile()">Save Changes</button>
+              <!-- <input type="text" class="form-control" id="phone" placeholder="9066352045" name="phone"> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--editProfile Modal -->
+
+<div class="modal fade" id="verified" role="dialog">
+  <div class="modal-dialog" style="margin-top:12%;">
+    <div class="modal-content col-xs-12 zeroPadding">
+      <div class="modal-body text-center sellPopup col-xs-12 padMore">
+        <div class="col-xs-12 contentSell padMoree">
+          <div class="sizeLarge col-xs-12 zeroPadding errorMsgs"></div>
+        </div>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
