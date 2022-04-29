@@ -10,7 +10,7 @@
   "license": "(ISC)  ",
   "dependencies": {
     "apn": "~2.1.1",
-    "async": "^2.1.5",
+    "async": "^2.6.4",
     "aws-sdk": "~2.6.8",
     "body-parser": "~1.15.2",
     "elasticsearch": "^13.3.1",
